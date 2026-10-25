@@ -19,7 +19,7 @@ with zipfile.ZipFile(a.ipa) as z:
   pos+=size
  assert platform==2,'Expected iOS device host, not simulator'
  assert info['CFBundleSupportedPlatforms']==['iPhoneOS']
- assert info['CFBundleVersion']=='54.1024.16'
+ assert info['CFBundleVersion']==json.loads((repo/'distribution.json').read_text())['build']
  assert str(info['RespringProgressCloudKit']).lower() in ('false','no','0'),'Default unsigned release must not claim CloudKit provisioning'
  assert info['CFBundleIcons']['CFBundlePrimaryIcon']['CFBundleIconName']=='PeggleSourceTest'
  with zipfile.ZipFile(io.BytesIO(z.read(root+'Peggle.ipa'))) as guest:

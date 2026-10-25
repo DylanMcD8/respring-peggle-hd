@@ -78,6 +78,8 @@
     if (!UIKit_IsSystemVersionAtLeast(9.0)) {
         self.frame = self.screen.bounds;
     }
+    if (self.windowScene && !CGRectEqualToRect(self.frame, self.windowScene.coordinateSpace.bounds))
+        self.frame = self.windowScene.coordinateSpace.bounds;
     [super layoutSubviews];
 }
 
@@ -91,7 +93,7 @@ SetupWindowData(_THIS, SDL_Window *window, UIWindow *uiwindow, SDL_bool created)
     SDL_DisplayData *displaydata = (__bridge SDL_DisplayData *) display->driverdata;
     SDL_uikitview *view;
 
-    CGRect frame = UIKit_ComputeViewFrame(window, displaydata.uiscreen);
+    CGRect frame = uiwindow.windowScene ? uiwindow.bounds : UIKit_ComputeViewFrame(window, displaydata.uiscreen);
     int width  = (int) frame.size.width;
     int height = (int) frame.size.height;
 
@@ -214,26 +216,30 @@ UIKit_CreateWindow(_THIS, SDL_Window *window)
 
         /* ignore the size user requested, and make a fullscreen window */
         /* !!! FIXME: can we have a smaller view? */
-        UIWindow *uiwindow = [[SDL_uikitwindow alloc] initWithFrame:data.uiscreen.bounds];
-
-        /* Local Chuzzle compatibility modification: associate the SDL
-         * window with the host's single UIKit scene on current iOS. */
-        if (@available(iOS 13.0, *)) {
-            for (UIScene *scene in [UIApplication sharedApplication].connectedScenes) {
-                if ([scene isKindOfClass:[UIWindowScene class]] &&
-                    ((UIWindowScene *)scene).screen == data.uiscreen) {
-                    uiwindow.windowScene = (UIWindowScene *)scene;
-                    if ([scene.delegate respondsToSelector:@selector(setWindow:)]) {
-                        [(id<UIWindowSceneDelegate>)scene.delegate setWindow:uiwindow];
-                    }
-                    break;
-                }
+        // Peggle HD has one foreground scene. iPadOS can expose different
+        // UIScreen objects through the scene and legacy display APIs.
+        // Attach to the scene first; never leave the game window orphaned.
+        UIWindowScene *activeScene = nil;
+        for (UIScene *candidate in UIApplication.sharedApplication.connectedScenes) {
+            if (![candidate isKindOfClass:UIWindowScene.class]) continue;
+            if (candidate.activationState == UISceneActivationStateForegroundActive) {
+                activeScene = (UIWindowScene *)candidate; break;
             }
+            if (candidate.activationState == UISceneActivationStateForegroundInactive)
+                activeScene = (UIWindowScene *)candidate;
         }
-
-        /* put the window on an external display if appropriate. */
-        if (data.uiscreen != [UIScreen mainScreen]) {
-            [uiwindow setScreen:data.uiscreen];
+        UIWindow *uiwindow;
+        if (activeScene) {
+            uiwindow = [[SDL_uikitwindow alloc] initWithWindowScene:activeScene];
+            uiwindow.frame = activeScene.coordinateSpace.bounds;
+            id<UIWindowSceneDelegate> delegate = (id)activeScene.delegate;
+            if ([delegate respondsToSelector:@selector(window)] && delegate.window != uiwindow)
+                delegate.window.hidden = YES;
+            if ([delegate respondsToSelector:@selector(setWindow:)]) delegate.window = uiwindow;
+            NSLog(@"Peggle SDL scene attached: screen=%@ scene=%@", activeScene.screen, NSStringFromCGRect(activeScene.coordinateSpace.bounds));
+        } else {
+            uiwindow = [[SDL_uikitwindow alloc] initWithFrame:data.uiscreen.bounds];
+            if (data.uiscreen != UIScreen.mainScreen) uiwindow.screen = data.uiscreen;
         }
 
         if (SetupWindowData(_this, window, uiwindow, SDL_TRUE) < 0) {
@@ -307,7 +313,7 @@ UIKit_UpdateWindowBorder(_THIS, SDL_Window * window)
     }
 
     /* Update the view's frame to account for the status bar change. */
-    viewcontroller.view.frame = UIKit_ComputeViewFrame(window, data.uiwindow.screen);
+    viewcontroller.view.frame = data.uiwindow.windowScene ? data.uiwindow.bounds : UIKit_ComputeViewFrame(window, data.uiwindow.screen);
 #endif /* !TARGET_OS_TV */
 
 #ifdef SDL_IPHONE_KEYBOARD
