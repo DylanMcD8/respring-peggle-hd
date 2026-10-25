@@ -24,24 +24,6 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Link your selected in-game user using Enable Automatic iCloud Syncing in Manage Save Files first. Adventure checkpoints, cleared and aced levels, and challenge trophies sync through one shared iCloud save file for your Apple Account. Linking different users combines their completed levels and trophies. During play, incoming changes offer Apply and Restart or Later. Scores, statistics, and unfinished shots stay on this device.</string>
-			<key>Title</key>
-			<string>iCloud Save Files</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<false/>
-			<key>Key</key>
-			<string>PeggleAutomaticProgressSync</string>
-			<key>Title</key>
-			<string>Automatically Sync Save Files (Experimental)</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
 			<string>When enabled, the game will render up to 60 FPS, or 120 FPS on ProMotion displays. When disabled, it uses the app's original 30 FPS.</string>
 			<key>Title</key>
 			<string>Rendering</string>

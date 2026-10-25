@@ -86,6 +86,12 @@ xcrun --sdk "$sdk" clang -ffile-prefix-map="$HOME=~" -arch arm64 -isysroot "$SDK
   -target "arm64-apple-$platform_flag" -mios-version-min=15.0 -O2 -fobjc-arc \
   -c "$project_root/ios/cloud_progress.m" -o "$build_dir/cloud-progress.o"
 xcrun --sdk "$sdk" clang -ffile-prefix-map="$HOME=~" -arch arm64 -isysroot "$SDKROOT" \
+  -target "arm64-apple-$platform_flag" -mios-version-min=15.0 -O2 -fobjc-arc \
+  -c "$project_root/ios/cloud_capability.m" -o "$build_dir/cloud-capability.o"
+xcrun --sdk "$sdk" clang -ffile-prefix-map="$HOME=~" -arch arm64 -isysroot "$SDKROOT" \
+  -target "arm64-apple-$platform_flag" -mios-version-min=15.0 -O2 -fobjc-arc \
+  -c "$project_root/ios/folder_sync.m" -o "$build_dir/folder-sync.o"
+xcrun --sdk "$sdk" clang -ffile-prefix-map="$HOME=~" -arch arm64 -isysroot "$SDKROOT" \
   -target "arm64-apple-$platform_flag" -mios-version-min=15.0 \
   -I "$sdl_install/include/SDL2" \
   "$project_root/ios/main.m" \
@@ -93,6 +99,8 @@ xcrun --sdk "$sdk" clang -ffile-prefix-map="$HOME=~" -arch arm64 -isysroot "$SDK
   "$project_root/ios/save_manager.m" \
   "$project_root/ios/nights_settings.m" \
   "$build_dir/cloud-progress.o" \
+  "$build_dir/cloud-capability.o" \
+  "$build_dir/folder-sync.o" \
   "$build_dir/auto-progress.o" \
   "$project_root/ios/import_preview.m" \
   "$project_root/ios/keyboard_bridge.m" \

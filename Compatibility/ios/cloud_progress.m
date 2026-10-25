@@ -5,10 +5,10 @@ NSString * const PeggleCloudSyncDidCompleteNotification=@"PeggleCloudSyncDidComp
 static NSString * const LastSyncKey=@"PeggleLastSuccessfulCloudSync";
 NSDate *PeggleCloudLastSyncDate(void) {
  NSUserDefaults *defaults=NSUserDefaults.standardUserDefaults;
- id saved=[defaults objectForKey:LastSyncKey];
+ id saved=[defaults objectForKey:PeggleUsesFolderSync()?@"PeggleLastFolderExchange":LastSyncKey];
  // Seed older installations only from a receipt that confirms a successful
  // cloud exchange. Failed attempts must never become the last-sync date.
- if(!saved){
+ if(!saved&&!PeggleUsesFolderSync()){
   NSString *documents=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES).firstObject;
   NSDictionary *receipt=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[documents stringByAppendingPathComponent:@"Progress-sync-status.json"]]?:[NSData data] options:0 error:NULL];
   if([receipt isKindOfClass:NSDictionary.class]&&[receipt[@"ok"]isKindOfClass:NSNumber.class]&&[receipt[@"cloud_synced"]isKindOfClass:NSNumber.class]&&[receipt[@"ok"]boolValue]&&[receipt[@"cloud_synced"]boolValue])saved=receipt[@"timestamp"];
@@ -18,7 +18,7 @@ NSDate *PeggleCloudLastSyncDate(void) {
  return [NSDate dateWithTimeIntervalSince1970:[saved doubleValue]];
 }
 static void RecordSuccessfulSync(void) {
- [NSUserDefaults.standardUserDefaults setDouble:NSDate.date.timeIntervalSince1970 forKey:LastSyncKey];
+ [NSUserDefaults.standardUserDefaults setDouble:NSDate.date.timeIntervalSince1970 forKey:PeggleUsesFolderSync()?@"PeggleLastFolderExchange":LastSyncKey];
  dispatch_async(dispatch_get_main_queue(),^{[NSNotificationCenter.defaultCenter postNotificationName:PeggleCloudSyncDidCompleteNotification object:nil];});
 }
 // One explicitly selected shared progress slot for the prototype. Only our JSON
@@ -65,7 +65,18 @@ static void RecordSuccessfulSync(void) {
 }
 @end
 void PeggleCloudProgress(NSDictionary *(^action)(int,NSString *,BOOL),void(^completion)(NSDictionary *)) {
- if(![[NSBundle.mainBundle objectForInfoDictionaryKey:@"RespringProgressCloudKit"]boolValue]){completion(@{@"ok":@NO,@"error":@"CloudKit is unavailable in this build. Export and import a save file to test transfers."});return;}
+ if(PeggleUsesFolderSync()){
+  NSDictionary *source=action(10,@"",NO);if(![source[@"ok"]boolValue]){completion(source);return;}
+  PeggleFolderExchange(source,^NSDictionary *(NSDictionary *value){NSData *data=[NSJSONSerialization dataWithJSONObject:value options:0 error:NULL];return action(20,[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding],NO);},^(NSDictionary *result){
+   if(![result[@"ok"]boolValue]){completion(result);return;}
+   NSData *data=[NSJSONSerialization dataWithJSONObject:result[@"document"] options:0 error:NULL];NSDictionary *preview=action(13,[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding],NO);
+   if(![preview[@"ok"]boolValue]){completion(preview);return;}
+   NSDictionary *applied=[preview[@"changed"]boolValue]?action(12,preview[@"token"],YES):action(7,@"",NO);
+   if(![applied[@"ok"]boolValue]){completion(applied);return;}
+   NSMutableDictionary *done=[applied mutableCopy];done[@"profile"]=source[@"profile"]?:@"";done[@"folder_checked"]=@YES;RecordSuccessfulSync();completion(done);
+  });return;
+ }
+ if(!PeggleCloudSupported()){completion(@{@"ok":@NO,@"error":@"CloudKit is unavailable in this build. Export and import a save file to test transfers."});return;}
  CKContainer *container=[CKContainer containerWithIdentifier:[NSBundle.mainBundle objectForInfoDictionaryKey:@"RespringCloudKitContainer"]?:@"iCloud.com.respringapps.peggle"];
  PeggleProgressCloudSession *session=[PeggleProgressCloudSession new];session.action=action;session.completion=completion;session.database=container.privateCloudDatabase;session.recordID=[[CKRecordID alloc]initWithRecordName:@"prototype-unlocks-v1"];
  [container accountStatusWithCompletionHandler:^(CKAccountStatus status,NSError *error){if(error){[session fail:error];return;}if(status!=CKAccountStatusAvailable){[session finish:@{@"ok":@NO,@"error":@"Sign in to iCloud in Settings to sync save files. You can continue playing offline."}];return;}[session fetch];}];
@@ -74,6 +85,7 @@ void PeggleCloudProgress(NSDictionary *(^action)(int,NSString *,BOOL),void(^comp
 // Runtime transport uses immutable canonical documents only. It cannot invoke
 // Save Manager's live-file operations or change the selected save slot.
 void PeggleCloudExchange(NSDictionary *source,NSDictionary *(^pureMerge)(NSDictionary *),void(^completion)(NSDictionary *)) {
+ if(PeggleUsesFolderSync()){PeggleFolderExchange(source,pureMerge,^(NSDictionary *result){if([result[@"ok"]boolValue])RecordSuccessfulSync();completion(result);});return;}
  __block NSDictionary *merged=nil;
  PeggleCloudProgress(^NSDictionary *(int code,NSString *value,BOOL confirmed){
   if(code==10)return source;

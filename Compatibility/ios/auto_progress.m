@@ -19,9 +19,9 @@ static NSUInteger Epoch;
 static _Atomic unsigned LinkedID;
 static _Atomic int PromptReady;
 static NSTimeInterval LastCapture;
-static NSString *StatePath(void){return [Docs stringByAppendingPathComponent:@"Progress-Auto-State.json"];}
-static BOOL Enabled(void){return [NSUserDefaults.standardUserDefaults boolForKey:@"PeggleAutomaticProgressSync"]&&[NSUserDefaults.standardUserDefaults integerForKey:@"PeggleSyncProfileID"]>0;}
-static void Persist(void){if(!Docs)return;NSMutableDictionary *v=[@{@"schema":@1,@"profile_id":@(atomic_load(&LinkedID))}mutableCopy];if(Local)v[@"local"]=Local;if(Pending)v[@"pending"]=Pending;if(Deferred)v[@"deferred"]=Deferred;[JSON(v) writeToFile:StatePath() atomically:YES encoding:NSUTF8StringEncoding error:NULL];}
+static NSString *StatePath(void){return [Docs stringByAppendingPathComponent:PeggleUsesFolderSync()?@"Folder-Sync-Auto-State.json":@"Progress-Auto-State.json"];}
+static BOOL Enabled(void){return PeggleSyncReady()&&[NSUserDefaults.standardUserDefaults boolForKey:PeggleSyncPreferenceKey(@"PeggleAutomaticProgressSync")]&&[NSUserDefaults.standardUserDefaults integerForKey:PeggleSyncPreferenceKey(@"PeggleSyncProfileID")]>0;}
+static void Persist(void){if(!Docs)return;NSMutableDictionary *v=[@{@"schema":@1,@"context":PeggleSyncContext(),@"profile_id":@(atomic_load(&LinkedID))}mutableCopy];if(Local)v[@"local"]=Local;if(Pending)v[@"pending"]=Pending;if(Deferred)v[@"deferred"]=Deferred;[JSON(v) writeToFile:StatePath() atomically:YES encoding:NSUTF8StringEncoding error:NULL];}
 static BOOL Receive(NSDictionary *remote){
  NSString *before=Pending?JSON(Pending):nil;
  if(!Local||!remote)return NO;NSDictionary *m=Merge(@{@"local":Local[@"document"],@"remote":remote});if(![m[@"ok"]boolValue])return NO;
@@ -30,16 +30,16 @@ static BOOL Receive(NSDictionary *remote){
 static void Exchange(BOOL force){
  if(!Enabled()||Busy||!Local||Reloading)return;
  if(!force&&NextAttempt&&[NextAttempt timeIntervalSinceNow]>0)return;
- Busy=YES;NSUInteger epoch=Epoch;NSDictionary *source=Local;Status=@"Syncing save files with iCloud…";
+ Busy=YES;NSUInteger epoch=Epoch;NSDictionary *source=Local;Status=PeggleUsesFolderSync()?@"Checking save files in the selected folder…":@"Syncing save files with iCloud…";
 #if TARGET_OS_SIMULATOR
  // Explicit simulator-only fixture transport. Device builds contain no path
  // for injecting cloud documents or synthetic progress.
  NSString *testPath=NSProcessInfo.processInfo.environment[@"PEGGLE_AUTO_TEST_REMOTE"];
- if(testPath){NSDictionary *remote=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:testPath]?:[NSData data] options:0 error:NULL];if(remote)Receive(remote);Busy=NO;NextAttempt=[NSDate dateWithTimeIntervalSinceNow:2];LastUploaded=JSON(source[@"document"]);Status=Pending?@"An updated iCloud save file is ready to apply.":@"Adventure checkpoints, completed levels, and trophies synced with iCloud.";return;}
+ if(testPath){NSDictionary *remote=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:testPath]?:[NSData data] options:0 error:NULL];if(remote)Receive(remote);Busy=NO;NextAttempt=[NSDate dateWithTimeIntervalSinceNow:2];LastUploaded=JSON(source[@"document"]);Status=Pending?@"An updated iCloud save file is ready to apply.":(PeggleUsesFolderSync()?@"Save files were checked in the selected folder. iCloud Drive controls when changes reach your other devices.":@"Adventure checkpoints, completed levels, and trophies synced with iCloud.");return;}
 #endif
  PeggleCloudExchange(source,^NSDictionary *(NSDictionary *v){return Merge(v);},^(NSDictionary *result){dispatch_async(dispatch_get_main_queue(),^{
-  Busy=NO;if(epoch!=Epoch||!Enabled())return;
-  if([result[@"ok"]boolValue]){LastUploaded=JSON(source[@"document"]);NextAttempt=[NSDate dateWithTimeIntervalSinceNow:30];Receive(result[@"document"]);if(![JSON(Local[@"document"])isEqual:LastUploaded])NextAttempt=nil;Status=Pending?@"An updated iCloud save file is ready to apply.":@"Adventure checkpoints, completed levels, and trophies synced with iCloud.";}
+  if(epoch!=Epoch)return;Busy=NO;if(!Enabled())return;
+  if([result[@"ok"]boolValue]){LastUploaded=JSON(source[@"document"]);NextAttempt=[NSDate dateWithTimeIntervalSinceNow:30];Receive(result[@"document"]);if(![JSON(Local[@"document"])isEqual:LastUploaded])NextAttempt=nil;Status=Pending?@"An updated iCloud save file is ready to apply.":(PeggleUsesFolderSync()?@"Save files were checked in the selected folder. iCloud Drive controls when changes reach your other devices.":@"Adventure checkpoints, completed levels, and trophies synced with iCloud.");}
   else{NextAttempt=[NSDate dateWithTimeIntervalSinceNow:15];Status=@"Your save files are stored on this device. iCloud sync will retry automatically.";StartupIssue=result[@"error"]?:Status;Persist();}
  });});
 }
@@ -76,9 +76,9 @@ NSString *PeggleAutoStartupIssue(void){return StartupIssue;}
 void PeggleAutoGameStarted(void){Playing=YES;LastCapture=0;NSLog(@"PEGGLE_AUTO guest_started");}
 void PeggleAutoGameStopped(void){Playing=NO;Reloading=NO;NSLog(@"PEGGLE_AUTO guest_stopped");}
 void PeggleAutoPrepare(NSString *documents,BOOL reload){
- StartupIssue=nil;Docs=documents;Playing=NO;Reloading=NO;atomic_store(&LinkedID,(unsigned)[NSUserDefaults.standardUserDefaults integerForKey:@"PeggleSyncProfileID"]);if(!Enabled()){Status=nil;return;}
- NSDictionary *source=Act(10,@"",NO);if(![source[@"ok"]boolValue]||[source[@"profile_id"]unsignedIntValue]!=atomic_load(&LinkedID)){Status=@"Automatic sync is waiting for its linked in-game user. Select that user inside Peggle, then close and reopen the app. To link the selected user instead, turn iCloud sync off and on in Manage Save Files; this combines that user’s completed levels and trophies with the shared iCloud save file.";StartupIssue=Status;return;}
- if(!Local){NSDictionary *saved=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:StatePath()]?:[NSData data] options:0 error:NULL];if([saved[@"profile_id"]unsignedIntValue]==atomic_load(&LinkedID)){Pending=saved[@"pending"];Deferred=saved[@"deferred"];}}
+ StartupIssue=nil;Docs=documents;Playing=NO;Reloading=NO;atomic_store(&LinkedID,(unsigned)[NSUserDefaults.standardUserDefaults integerForKey:PeggleSyncPreferenceKey(@"PeggleSyncProfileID")]);if(!Enabled()){Status=nil;return;}
+ NSDictionary *source=Act(10,@"",NO);if(![source[@"ok"]boolValue]||[source[@"profile_id"]unsignedIntValue]!=atomic_load(&LinkedID)){Status=PeggleUsesFolderSync()?@"Automatic sync is waiting for its linked in-game user. Select that user inside Peggle, then close and reopen the app. To link the selected user instead, turn iCloud sync off and on in Manage Save Files. This combines that user’s completed levels and trophies with the selected folder.":@"Automatic sync is waiting for its linked in-game user. Select that user inside Peggle, then close and reopen the app. To link the selected user instead, turn iCloud sync off and on in Manage Save Files; this combines that user’s completed levels and trophies with the shared iCloud save file.";StartupIssue=Status;return;}
+ if(!Local){NSDictionary *saved=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:StatePath()]?:[NSData data] options:0 error:NULL];if((!PeggleUsesFolderSync()||[saved[@"context"]isEqual:PeggleSyncContext()])&&[saved[@"profile_id"]unsignedIntValue]==atomic_load(&LinkedID)){Pending=saved[@"pending"];Deferred=saved[@"deferred"];}}
  Local=source;
  // Revalidate staged cloud data against freshly saved local progress. Apply
  // only here, after the previous Environment and its file handles are gone.
@@ -89,9 +89,15 @@ void PeggleAutoPrepare(NSString *documents,BOOL reload){
   if(!Busy&&Pending){NSDictionary *preview=Act(13,JSON(Pending),NO);if([preview[@"ok"]boolValue]){NSDictionary *result=[preview[@"changed"]boolValue]?Act(12,preview[@"token"],YES):Act(7,@"",NO);if([result[@"ok"]boolValue]){Local=Act(10,@"",NO);Pending=nil;Deferred=nil;atomic_store(&PromptReady,0);Persist();}else{StartupIssue=result[@"error"];}}else{StartupIssue=preview[@"error"];}}
  }
 }
+void PeggleAutoDisconnect(void){
+ Epoch++;Busy=NO;Local=nil;Pending=nil;Deferred=nil;LastUploaded=nil;StartupIssue=nil;NextAttempt=nil;Status=nil;
+ atomic_store(&LinkedID,0);atomic_store(&PromptReady,0);
+ NSUserDefaults *d=NSUserDefaults.standardUserDefaults;[d setBool:NO forKey:PeggleSyncPreferenceKey(@"PeggleAutomaticProgressSync")];[d removeObjectForKey:PeggleSyncPreferenceKey(@"PeggleSyncProfileID")];Persist();
+}
 void PeggleAutoEnable(void(^completion)(NSString *)){
+ if(!PeggleSyncReady()){completion(PeggleUsesFolderSync()?@"Choose an iCloud Drive folder in Manage Save Files before enabling sync.":@"CloudKit is unavailable in this build. Export and import a save file to test transfers.");return;}
  NSDictionary *source=Act(10,@"",NO);if(![source[@"ok"]boolValue]){completion(@"Open Peggle and create an in-game user before enabling automatic sync.");return;}
- NSUserDefaults *d=NSUserDefaults.standardUserDefaults;[d setBool:YES forKey:@"PeggleAutomaticProgressSync"];[d setBool:NO forKey:@"PeggleShowSaveManagementOnLaunch"];[d setInteger:[source[@"profile_id"]integerValue]forKey:@"PeggleSyncProfileID"];Epoch++;Local=source;Pending=nil;Deferred=nil;LastUploaded=nil;atomic_store(&LinkedID,[source[@"profile_id"]unsignedIntValue]);atomic_store(&PromptReady,0);Persist();PeggleAutoPrepare(Docs,NO);completion([NSString stringWithFormat:@"Automatic sync enabled for in-game user %@. %@",source[@"profile"],Status]);
+ NSUserDefaults *d=NSUserDefaults.standardUserDefaults;[d setBool:YES forKey:PeggleSyncPreferenceKey(@"PeggleAutomaticProgressSync")];[d setBool:NO forKey:@"PeggleShowSaveManagementOnLaunch"];[d setInteger:[source[@"profile_id"]integerValue]forKey:PeggleSyncPreferenceKey(@"PeggleSyncProfileID")];Epoch++;Local=source;Pending=nil;Deferred=nil;LastUploaded=nil;atomic_store(&LinkedID,[source[@"profile_id"]unsignedIntValue]);atomic_store(&PromptReady,0);Persist();PeggleAutoPrepare(Docs,NO);if(PeggleUsesFolderSync()&&StartupIssue){completion(StartupIssue);return;}completion([NSString stringWithFormat:@"Automatic sync enabled for in-game user %@. %@",source[@"profile"],Status]);
 }
 
 void PeggleAutoWake(void){NextAttempt=nil;LastCapture=0;}

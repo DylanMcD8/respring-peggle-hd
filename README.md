@@ -15,13 +15,13 @@ The original ARM/Thumb game runs through a modified touchHLE interpreter, with g
 - Retains the original iPad layout with improved completed-frame presentation.
 - Peggle Nights content is activated, with a separate option to show its theme.
 - Import, merge and export save files through a native launch interface.
-- Experimental iCloud syncing of Adventure checkpoints, cleared/aced levels and individual challenge completions with compatible CloudKit provisioning.
+- Experimental iCloud Drive folder syncing of Adventure checkpoints, cleared/aced levels and individual challenge completions. Choose the same folder in Files on each device.
 - Icon Composer app icon and a modern UIKit interface, including a glass Play button on iOS 26 and later.
 
 ### Notes
 Settings are available in Settings → Apps → Peggle HD. The launch interface can be hidden there. Layout settings take effect after closing and reopening the app.
 
-The downloadable IPA has no CloudKit provisioning. Manual save-file transfers work without it; enabling iCloud requires a developer build and a shared CloudKit container authorized for both apps. See [iCloud setup](docs/ICLOUD.md).
+Public builds sync through a folder you select in iCloud Drive; no CloudKit provisioning is needed. Select the same folder in both apps and on every device you want to sync. Developer builds can still use CloudKit. See [iCloud setup](docs/ICLOUD.md).
 
 Report reproducible issues in this repository. Original online services, including Game Center integration, are not restored.
 

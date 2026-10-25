@@ -7,3 +7,5 @@ NSString *PeggleAutoStatus(void);
 NSString *PeggleAutoStartupIssue(void);
 void PeggleAutoWake(void);
 void PeggleAutoBackground(void);
+
+void PeggleAutoDisconnect(void);

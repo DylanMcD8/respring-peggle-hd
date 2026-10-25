@@ -34,7 +34,7 @@ Use `iphonesimulator` for a simulator app. Build outside File Provider/iCloud-ma
 
 `Original/Payload` is the sanitized original game input. The build verifies its hashes and reconstructs a nested IPA. The ARM64 host reads the ARMv7 guest executable as data. The package script stages a copy and removes signing/provisioning/account metadata without changing the input app.
 
-Default builds support offline gameplay and manual save-file management. See [iCloud configuration](docs/ICLOUD.md) for developer provisioning.
+Default builds support iCloud Drive folder syncing, offline gameplay, and manual save-file management. See [iCloud configuration](docs/ICLOUD.md) for setup and optional personal CloudKit builds.
 
 ## Tests
 
@@ -43,6 +43,8 @@ cargo test --manifest-path Tests/SaveManager/Cargo.toml --offline --locked
 ```
 
 Tests cover validation, import/export, rollback, version-25 adapters, independent Classic/Nights challenge completions, Adventure checkpoints and merging. Fixtures use anonymous synthetic values. Rendering/performance still require hardware testing.
+
+On Apple silicon macOS, test the installed-signature capability check with `python3 Tests/CloudCapability/test_capability.py`. This covers real ad-hoc signatures, missing/re-signed entitlements, mismatched containers, and malformed executables.
 
 ## Layout
 
@@ -54,3 +56,11 @@ Tests cover validation, import/export, rollback, version-25 adapters, independen
 - `Notices`: dependency notices included in the app.
 
 Historical symbols may retain CHUZZLE or candidate-number prefixes. No expanded AOT experiment is enabled.
+
+Folder transport tests use the real Rust canonical merge engine and coordinated native file I/O:
+
+```sh
+cargo build --manifest-path Tests/FolderSync/Cargo.toml --offline --locked
+python3 Tests/FolderSync/test_folder_sync.py Tests/FolderSync/target/debug/libpeggle_folder_sync_tests.a
+```
+If `CARGO_TARGET_DIR` is set, pass its library path instead. These tests simulate offline and concurrent writers; live iCloud Drive delivery still requires device testing.

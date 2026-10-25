@@ -10,6 +10,7 @@
 @property BOOL rawSelection;
 @property BOOL progressSelection;
 @property BOOL exportSelection;
+@property BOOL syncFolderSelection;
 @end
 @implementation PeggleSavePicker
 @end
@@ -26,7 +27,7 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
 @property BOOL ready,busy,initialized,canRollback;
 @property(nonatomic,copy) NSString *initialMessage;
 @property(nonatomic,strong) NSMutableArray<UIButton *> *buttons;
-@property(nonatomic,strong) UIButton *rollbackButton;
+@property(nonatomic,strong) UIButton *rollbackButton,*folderButton;
 @property(copy) void(^operationCleanup)(void);
 @property(nonatomic,strong) UISegmentedControl *importMode;
 @property(nonatomic,strong) UISwitch *cloudSwitch;
@@ -87,17 +88,23 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
  [exports addArrangedSubview:[self button:@"Save as Folder" action:@selector(exportFolder)]];[exports addArrangedSubview:[self button:@"Save as ZIP" action:@selector(exportBackup)]];
  [exports addArrangedSubview:[self label:@"Game Center data and app settings are not included in exported save files." style:UIFontTextStyleFootnote secondary:YES]];
  self.rollbackButton=[self button:@"Restore Previous Save Files…" action:@selector(rollback)];[exports addArrangedSubview:self.rollbackButton];[self.columns addArrangedSubview:exports];
+ if(PeggleSyncSupported()){
  UIStackView *cloud=[self section:@"iCloud (Experimental)" symbol:@"icloud" description:@"Sync Adventure checkpoints, cleared and aced levels, and challenge completion between Respring's versions of Peggle and Peggle HD."];
  self.lastSynced=[self label:@"" style:UIFontTextStyleFootnote secondary:YES];self.lastSynced.accessibilityIdentifier=@"Last Synced";[cloud insertArrangedSubview:self.lastSynced atIndex:1];[self updateLastSynced];
  [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(cloudSyncDidComplete:) name:PeggleCloudSyncDidCompleteNotification object:nil];
  self.cloudSwitch=[UISwitch new];self.cloudSwitch.onTintColor=[self accent];self.cloudSwitch.accessibilityLabel=@"Enable iCloud Sync";[self.cloudSwitch addTarget:self action:@selector(cloudChanged) forControlEvents:UIControlEventValueChanged];
  UIStackView *toggle=[[UIStackView alloc]initWithArrangedSubviews:@[[self label:@"Enable iCloud Sync" style:UIFontTextStyleBody secondary:NO],self.cloudSwitch]];toggle.spacing=12;toggle.alignment=UIStackViewAlignmentCenter;[cloud addArrangedSubview:toggle];
- [cloud addArrangedSubview:[self label:@"Automatic sync links one in-game user on this device. Linking a different user combines their completed levels and trophies with the same iCloud save file; it does not create a separate file for that user." style:UIFontTextStyleFootnote secondary:YES]];
+ if(PeggleUsesFolderSync()){
+  self.folderButton=[self button:@"Choose iCloud Drive Folder" action:@selector(chooseSyncFolder)];[cloud addArrangedSubview:self.folderButton];[self updateFolderControls];
+ }else{
+  [cloud addArrangedSubview:[self label:@"Automatic sync links one in-game user on this device. Linking a different user combines their completed levels and trophies with the same iCloud save file; it does not create a separate file for that user." style:UIFontTextStyleFootnote secondary:YES]];
+ }
  [cloud addArrangedSubview:[self button:@"How iCloud Sync Works" action:@selector(showCloudHelp)]];
  [cloud addArrangedSubview:[self button:@"Sync Immediately" action:@selector(syncProgress)]];
  UIButton *more=[self button:@"Import + Export Save Files" action:NULL];[more removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];more.showsMenuAsPrimaryAction=YES;more.menu=[UIMenu menuWithChildren:@[[UIAction actionWithTitle:@"Export Save Files" image:[UIImage systemImageNamed:@"square.and.arrow.up"] identifier:nil handler:^(UIAction *a){[self exportProgress];}],[UIAction actionWithTitle:@"Import Save Files" image:[UIImage systemImageNamed:@"square.and.arrow.down"] identifier:nil handler:^(UIAction *a){[self chooseProgress];}]]];[cloud addArrangedSubview:more];[self.columns addArrangedSubview:cloud];
+ }
  // Give extra column height to empty space below the controls, not to labels or buttons.
- for(UIStackView *card in @[imports,exports,cloud]){UIView *spacer=[UIView new];[spacer.heightAnchor constraintGreaterThanOrEqualToConstant:0].active=YES;[card addArrangedSubview:spacer];[card setCustomSpacing:0 afterView:card.arrangedSubviews[card.arrangedSubviews.count-2]];}
+ for(UIStackView *card in self.columns.arrangedSubviews){UIView *spacer=[UIView new];[spacer.heightAnchor constraintGreaterThanOrEqualToConstant:0].active=YES;[card addArrangedSubview:spacer];[card setCustomSpacing:0 afterView:card.arrangedSubviews[card.arrangedSubviews.count-2]];}
  // Match School Assistant's New/Edit Schoolwork layout: the content guide
  // owns vertical scrolling; the frame guide owns width. Unclipped scrolling
  // continues drawing through the bottom safe area without a hard edge.
@@ -107,10 +114,12 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
  [self updateButtons];
 }
 - (void)updateLastSynced {
- NSDate *date=PeggleCloudLastSyncDate();
- if(!date){self.lastSynced.text=@"Last synced: Never";return;}
- NSDateFormatter *format=[NSDateFormatter new];format.dateStyle=NSDateFormatterMediumStyle;format.timeStyle=NSDateFormatterShortStyle;
- self.lastSynced.text=[NSString stringWithFormat:@"Last synced: %@",[format stringFromDate:date]];[format release];
+ if(!self.lastSynced)return;
+ NSDate *date=PeggleCloudLastSyncDate();NSString *subtitle=nil;
+ if(date){NSDateFormatter *format=[NSDateFormatter new];format.dateStyle=NSDateFormatterMediumStyle;format.timeStyle=NSDateFormatterShortStyle;subtitle=[NSString stringWithFormat:PeggleUsesFolderSync()?@"Last checked: %@":@"Last synced: %@",[format stringFromDate:date]];[format release];}
+ else subtitle=PeggleUsesFolderSync()?@"Last checked: Never":@"Last synced: Never";
+ if(PeggleUsesFolderSync()){NSString *folder=PeggleFolderName().length?[NSString stringWithFormat:@"Folder: %@",PeggleFolderName()]:@"No folder selected";subtitle=[subtitle stringByAppendingFormat:@"\n%@",folder];}
+ self.lastSynced.text=subtitle;
 }
 - (void)cloudSyncDidComplete:(NSNotification *)notification {[self updateLastSynced];}
 - (void)dealloc {[NSNotificationCenter.defaultCenter removeObserver:self];[super dealloc];}
@@ -139,12 +148,34 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
   @[@"When changes are applied",@"After Peggle saves, automatic sync uploads the linked user’s changes and checks for changes from your other devices. Incoming changes are applied when you open the game with the linked user selected. If they arrive during play, choose Apply and Restart or Later. Later keeps you playing and applies the changes next time you open Peggle. A later Adventure checkpoint replaces an older unfinished board and starts that level from the beginning. If iCloud is unavailable, you can keep playing; syncing retries automatically."],
   @[@"What stays on this device",@"Scores, statistics, replay files, unfinished shots, in-game user names, and app settings do not sync through iCloud. This shared save file is not a full backup. Use Export to make a folder or ZIP copy of your local save files, including all in-game users and unfinished games."]
  ];
+ if(PeggleUsesFolderSync())sections=@[
+  @[@"Choose the same folder",@"In Files, create or choose a Peggle folder in iCloud Drive. Select that same folder in Peggle or Peggle HD on every device you want to sync. Folder access is granted through Files; no special iCloud signing setup is required."],
+  @[@"Linking an in-game user",@"Enable iCloud Sync to link the in-game user currently selected in the game. Names may differ between devices. Everyone linked to the same folder combines completed levels and trophies. Use a different folder for a separate set; changing folders turns automatic sync off until you link a user again."],
+  @[@"What is shared",@"Save files in the folder contain Classic and Nights Adventure checkpoints, cleared and aced levels, and each completed challenge. Syncing keeps the furthest Adventure checkpoint and combines completed levels and challenges. Resets and deletions do not remove completed entries from other devices."],
+  @[@"Files and delivery",@"Each installation writes its own small save file, so devices playing offline do not overwrite each other. Keep these files together. iCloud Drive delivers changes when available; Last checked means this app checked the folder, not that every device has received the files. Downloads or offline devices can delay syncing."],
+  @[@"When changes are applied",@"The app checks the folder when opening and periodically while playing. Incoming changes are applied before play when the linked in-game user is selected. During play, choose Apply and Restart or Later. A later Adventure checkpoint starts that level from the beginning. If folder access is revoked or the folder is moved, choose it again in Manage Save Files."],
+  @[@"Manual checks and backups",@"Sync Immediately combines the currently selected in-game user with the folder, even if automatic sync is linked to someone else. Scores, statistics, unfinished shots, replays, user names, and app settings stay local. Use Export for a full backup of your local save files."]
+ ];
  for(NSArray<NSString *> *section in sections){UILabel *heading=[self label:section[0] style:UIFontTextStyleHeadline secondary:NO];[body addArrangedSubview:heading];[body addArrangedSubview:[self label:section[1] style:UIFontTextStyleBody secondary:NO]];[body setCustomSpacing:24 afterView:body.arrangedSubviews.lastObject];}
  [NSLayoutConstraint activateConstraints:@[[scroll.topAnchor constraintEqualToAnchor:help.view.safeAreaLayoutGuide.topAnchor],[scroll.bottomAnchor constraintEqualToAnchor:help.view.bottomAnchor],[scroll.leadingAnchor constraintEqualToAnchor:help.view.leadingAnchor],[scroll.trailingAnchor constraintEqualToAnchor:help.view.trailingAnchor],[body.topAnchor constraintEqualToAnchor:scroll.contentLayoutGuide.topAnchor constant:20],[body.bottomAnchor constraintEqualToAnchor:scroll.contentLayoutGuide.bottomAnchor constant:-20],[body.leadingAnchor constraintEqualToAnchor:scroll.frameLayoutGuide.leadingAnchor constant:20],[body.trailingAnchor constraintEqualToAnchor:scroll.frameLayoutGuide.trailingAnchor constant:-20]]];
  UINavigationController *navigation=[[UINavigationController alloc]initWithRootViewController:help];navigation.modalPresentationStyle=UIModalPresentationFormSheet;navigation.preferredContentSize=CGSizeMake(600,700);[self presentPanel:navigation];
 }
-- (void)cloudChanged {if(self.cloudSwitch.on){[self enableAutomaticSync];}else{[NSUserDefaults.standardUserDefaults setBool:NO forKey:@"PeggleAutomaticProgressSync"];[self updateButtons];[self message:@"iCloud Sync is disabled. Local save files are not affected." title:@"iCloud Sync Disabled"];}}
-- (void)updateButtons {BOOL enabled=self.initialized&&!self.busy&&!self.ready;for(UIButton *button in self.buttons)button.enabled=enabled;self.rollbackButton.enabled=enabled&&self.canRollback;self.importMode.enabled=enabled;self.cloudSwitch.enabled=enabled;self.cloudSwitch.on=[NSUserDefaults.standardUserDefaults boolForKey:@"PeggleAutomaticProgressSync"];}
+- (void)updateFolderControls {
+ if(!PeggleUsesFolderSync())return;
+ UIButtonConfiguration *configuration=self.folderButton.configuration;configuration.title=PeggleSyncReady()?@"Change iCloud Drive Folder":@"Choose iCloud Drive Folder";self.folderButton.configuration=configuration;self.folderButton.accessibilityIdentifier=configuration.title;
+ [self updateLastSynced];
+}
+- (void)presentSyncFolderPicker {
+ PeggleSavePicker *picker=[[PeggleSavePicker alloc]initForOpeningContentTypes:@[UTTypeFolder] asCopy:NO];picker.syncFolderSelection=YES;picker.delegate=self;picker.allowsMultipleSelection=NO;[self presentPanel:picker];
+}
+- (void)chooseSyncFolder {
+ if(self.busy||self.ready)return;
+ UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"Choose iCloud Drive Folder" message:@"Create or choose a Peggle folder in iCloud Drive, then select the same folder in Peggle or Peggle HD on your other devices.\n\nAutomatic sync links one in-game user on each device. Everyone using the folder combines Adventure checkpoints, completed levels, and challenge completion. Use a different folder to keep another set separate.\n\nChanging folders turns off automatic syncing until you link an in-game user again. Existing save files are not deleted." preferredStyle:UIAlertControllerStyleAlert];
+ [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+ [alert addAction:[UIAlertAction actionWithTitle:@"Choose Folder" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self presentSyncFolderPicker];}]];[self presentPanel:alert];
+}
+- (void)cloudChanged {if(self.cloudSwitch.on){[self enableAutomaticSync];}else{[NSUserDefaults.standardUserDefaults setBool:NO forKey:PeggleSyncPreferenceKey(@"PeggleAutomaticProgressSync")];[self updateButtons];[self message:@"iCloud Sync is disabled. Local save files are not affected." title:@"iCloud Sync Disabled"];}}
+- (void)updateButtons {BOOL enabled=self.initialized&&!self.busy&&!self.ready;for(UIButton *button in self.buttons)button.enabled=enabled;self.rollbackButton.enabled=enabled&&self.canRollback;self.importMode.enabled=enabled;self.cloudSwitch.enabled=enabled&&PeggleSyncReady();self.cloudSwitch.on=[NSUserDefaults.standardUserDefaults boolForKey:PeggleSyncPreferenceKey(@"PeggleAutomaticProgressSync")];}
 - (void)presentPanel:(UIViewController *)panel completion:(void(^)(void))completion {
  void(^show)(void)=^{[self presentViewController:panel animated:YES completion:completion];};
  if(self.presentedViewController){[self dismissViewControllerAnimated:YES completion:show];}else{show();}
@@ -191,21 +222,25 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
 - (void)exportFolder {[self exportAsFolder:YES];}
 - (void)exportBackup {[self exportAsFolder:NO];}
 - (void)enableAutomaticSync {
+ if(PeggleUsesFolderSync()&&!PeggleSyncReady()){[self chooseSyncFolder];return;}
  NSDictionary *source=SaveAction(10,@"",NO);if(![source[@"ok"]boolValue]){[self showError:source];[self updateButtons];return;}
- UIAlertController *a=[UIAlertController alertControllerWithTitle:@"Enable Automatic iCloud Syncing?" message:[NSString stringWithFormat:@"Link in-game user \"%@\" to the shared iCloud save file?\n\nAdventure checkpoints, cleared and aced levels, and challenge trophies will sync automatically. Peggle and Peggle HD use the same file for your Apple Account. User names can differ between devices. Linking another user combines their completed levels and trophies with this file; it does not create a separate file.\n\nThe app will open directly into the game. You can turn automatic sync off or show this menu again in Settings.",source[@"profile"]] preferredStyle:UIAlertControllerStyleAlert];
+ NSString *folderMessage=PeggleUsesFolderSync()?[NSString stringWithFormat:@"Link in-game user \"%@\" to the selected iCloud Drive folder?\n\nAdventure checkpoints, cleared and aced levels, and challenge completion will combine with the save files in that folder. Select the same folder on your other devices.\n\nThe app will open directly into the game. To manage syncing again, enable Show Save File Management on Launch in Settings.",source[@"profile"]]:nil;
+ UIAlertController *a=[UIAlertController alertControllerWithTitle:@"Enable Automatic iCloud Syncing?" message:folderMessage?:[NSString stringWithFormat:@"Link in-game user \"%@\" to the shared iCloud save file?\n\nAdventure checkpoints, cleared and aced levels, and challenge trophies will sync automatically. Peggle and Peggle HD use the same file for your Apple Account. User names can differ between devices. Linking another user combines their completed levels and trophies with this file; it does not create a separate file.\n\nThe app will open directly into the game. You can turn automatic sync off in Manage Save Files. To show this menu again, enable Show Save File Management on Launch in Settings.",source[@"profile"]] preferredStyle:UIAlertControllerStyleAlert];
  [a addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *x){[self updateButtons];}]];
- [a addAction:[UIAlertAction actionWithTitle:@"Enable Automatic iCloud Syncing" style:UIAlertActionStyleDefault handler:^(UIAlertAction *x){[self beginCloudOperation:@"Enabling automatic iCloud sync…" operation:^{PeggleAutoEnable(^(NSString *status){self.busy=NO;[self updateButtons];[self message:status title:@"iCloud Sync Enabled"];});}];}]];
+ [a addAction:[UIAlertAction actionWithTitle:@"Enable Automatic iCloud Syncing" style:UIAlertActionStyleDefault handler:^(UIAlertAction *x){[self beginCloudOperation:@"Enabling automatic iCloud sync…" operation:^{PeggleAutoEnable(^(NSString *status){self.busy=NO;[self updateButtons];[self message:status title:PeggleUsesFolderSync()&&PeggleAutoStartupIssue()?@"Sync Needs Attention":@"iCloud Sync Enabled"];});}];}]];
  [self presentPanel:a];
 }
 - (void)syncProgress {
+ if(PeggleUsesFolderSync()&&!PeggleSyncReady()){[self chooseSyncFolder];return;}
  [self run:10 value:@"" confirmed:NO completion:^(NSDictionary *source){
   NSString *message=[NSString stringWithFormat:@"Combine Adventure checkpoints, cleared and aced levels, and challenge trophies for in-game user \"%@\" with the shared iCloud save file?\n\nThis uses your currently selected user, even if automatic sync is linked to a different user. There is one shared file for your Apple Account, so only sync users whose completed levels and trophies you want to combine.\n\nA later Adventure checkpoint replaces an older unfinished board and starts that level from the beginning. Scores and statistics stay local. Resets and deletions do not sync.",source[@"profile"]];
+  if(PeggleUsesFolderSync())message=[NSString stringWithFormat:@"Combine Adventure checkpoints, cleared and aced levels, and challenge completion for in-game user \"%@\" with the selected iCloud Drive folder?\n\nThis uses the currently selected user. A later Adventure checkpoint starts that level from the beginning. Scores and unfinished shots stay local. iCloud Drive controls when other devices receive the save files.",source[@"profile"]];
   UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"Sync Save Files" message:message preferredStyle:UIAlertControllerStyleAlert];
   [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
   [alert addAction:[UIAlertAction actionWithTitle:@"Merge Save Files" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
    [self beginCloudOperation:@"Syncing save files with iCloud…" operation:^{
    PeggleCloudProgress(^NSDictionary *(int code,NSString *value,BOOL confirmed){return SaveAction(code,value,confirmed);},^(NSDictionary *result){dispatch_async(dispatch_get_main_queue(),^{
-    self.busy=NO;if([result[@"ok"]boolValue]){self.canRollback=[SaveAction(6,@"",NO)[@"can_rollback"]boolValue];[self message:[NSString stringWithFormat:@"Adventure checkpoints, cleared and aced levels, and challenge trophies synced for in-game user %@.",result[@"profile"]] title:@"iCloud Sync Complete"];}else{[self showError:result];}[self updateButtons];
+    self.busy=NO;if([result[@"ok"]boolValue]){self.canRollback=[SaveAction(6,@"",NO)[@"can_rollback"]boolValue];[self message:PeggleUsesFolderSync()?@"Save files were combined with the selected folder. iCloud Drive will deliver changes to your other devices when available.":[NSString stringWithFormat:@"Adventure checkpoints, cleared and aced levels, and challenge trophies synced for in-game user %@.",result[@"profile"]] title:PeggleUsesFolderSync()?@"Folder Checked":@"iCloud Sync Complete"];}else{[self showError:result];}[self updateButtons];
    });});
    }];
   }]];[self presentPanel:alert];
@@ -238,6 +273,10 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
  [self presentPanel:navigation];
 }
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
+ if([(PeggleSavePicker *)controller syncFolderSelection]){
+  if(self.busy||self.ready||urls.count!=1)return;self.busy=YES;[self updateButtons];
+  PeggleSelectSyncFolder(urls.firstObject,^(NSError *error){self.busy=NO;if(error){[self message:error.localizedDescription title:@"Unable to Select Folder"];}else{PeggleAutoDisconnect();[self updateFolderControls];[self message:@"The folder is ready. Select this same folder on your other devices, then enable iCloud Sync to link an in-game user." title:@"Sync Folder Selected"];}[self updateButtons];});return;
+ }
  if([(PeggleSavePicker *)controller exportSelection]){[self message:@"Your save file backup was exported to the selected location." title:@"Export Complete"];return;}
  if(self.busy||self.ready)return;for(NSURL *url in urls)if(!url.isFileURL){[self message:@"Choose files or a folder from Files." title:@"Unable to Import"];return;}
  dispatch_block_t cleanup=nil;@try{cleanup=PeggleAcquireImportScopes(urls);}@catch(NSException *exception){[self message:@"The selected provider could not grant read access." title:@"Unable to Import"];return;}
@@ -261,6 +300,7 @@ static NSDictionary *SaveAction(int code,NSString *value,BOOL confirmed){
  }];
 }
 - (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+ if([(PeggleSavePicker *)controller syncFolderSelection]){[self updateButtons];return;}
  BOOL exporting=[controller isKindOfClass:PeggleSavePicker.class]&&[(PeggleSavePicker *)controller exportSelection];[self message:exporting?@"No backup was saved to Files.":@"Your save files are unchanged." title:exporting?@"Export Cancelled":@"Import Cancelled"];
 }
 - (void)rollback {
