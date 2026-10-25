@@ -1,38 +1,40 @@
 <p align="center">
-  <img src="docs/images/RespringHeader.png" width="800" alt="Respring – Peggle HD">
+  <img src="docs/images/PeggleHDHeader.webp" width="800" alt="Respring – Peggle HD">
 </p>
 
 # Respring – Peggle HD
 
-The classic Peggle HD 2.0.9 experience, restored for modern Apple silicon iOS devices.
+Peggle has long been one of my favorite games of all time, and I have long wanted to have it on my modern devices. But, it's a 32-bit app, so that hasn’t been an option for years. But now, with the help of Codex (GPT-6 Astra and GPT 6.1 Sol), you can once again play Peggle on any modern iOS device!
 
 ### How does it work?
-The original ARM/Thumb game runs through a modified touchHLE interpreter, with guarded native helpers for selected expensive operations. A native UIKit host provides the launch interface, save-file management and modern device integration. No JIT or Rosetta is required. This is not a full ahead-of-time translation.
+The original ARM/Thumb game runs through a modified touchHLE interpreter, with native helpers for selected expensive operations. No JIT required!
 
 ### Enhancements
-- Faster startup and optimized rendering, image decoding, text handling and runtime paths.
-- Unlock Frame Rate: up to 60 FPS, or 120 FPS on ProMotion displays; the original 30 FPS remains available. Performance varies by screen and device.
-- Retains the original iPad layout with improved completed-frame presentation.
-- Peggle Nights content is activated, with a separate option to show its theme.
-- Import, merge and export save files through a native launch interface.
-- Experimental iCloud Drive folder syncing of Adventure checkpoints, cleared/aced levels and individual challenge completions. Choose the same folder in Files on each device.
-- Icon Composer app icon and a modern UIKit interface, including a glass Play button on iOS 26 and later.
+- iCloud Sync: using a folder you set up in Files, the special Respring builds of Peggle and Peggle HD can sync your save data across devices! You can also manually import and export save files as needed.
+- Unlock Frame Rate: the original game was locked to 30 FPS, but now you can play at up to 60 FPS, or 120 FPS on ProMotion displays! (frame rate may drop during certain actions/sequences)
+- Peggle Nights: the expansion content has been activated! You can also choose to hide the Nights theming on the main menu to keep a more classic appearance. 
+- App Icon: I have "remastered" the app icon with Icon Composer with full support for Default, Dark, Clear, and Tinted modes.
 
 ### Notes
-Settings are available in Settings → Apps → Peggle HD. The launch interface can be hidden there. Layout settings take effect after closing and reopening the app.
+- The app enhancements and options can be changed in Settings → Apps → Peggle HD.
+- The save file management interface can be hidden on shown in Settings as well.
+- The app relies on using the original 4:3 aspect ratio. This new build doesn't attempt to change or "fix" that.
+- It's not perfect! There may still be crashes. If you experience a crash or some other issue, please open an Issue on this repository.
+- Online content and services, including Game Center, are not available.
 
-Public builds sync through a folder you select in iCloud Drive; no CloudKit provisioning is needed. Select the same folder in both apps and on every device you want to sync. Developer builds can still use CloudKit. See [iCloud setup](docs/ICLOUD.md).
+As stated before, this project was achieved through the usage of generative AI. Outside of this README and Releases release notes, most things were written by an AI agent.
 
-Report reproducible issues in this repository. Original online services, including Game Center integration, are not restored.
+### iCloud Syncing
+To enable iCloud syncing for all users, I have set up a system that uses a selected folder from Files. If you add this folder in an iCloud-synced folder, such as the main iCloud Drive folder, the app will automatically detect and apply changes from other devices. 
 
-This project was developed with generative AI assistance; host/runtime modifications and technical build documentation were largely written by AI agents.
+If you have a **paid** Apple Developer account, you may build the app yourself and enable an integrated CloudKit iCloud syncing experience. See [iCloud setup](docs/ICLOUD.md).
 
 ## How to Install
 Download **Peggle-HD.ipa** from [Releases](https://github.com/DylanMcD8/respring-peggle-hd/releases). It is an **unsigned ARM64 device IPA**: use your own signing/sideloading workflow to sign it for your device. I recommend [Sideloadly](https://sideloadly.io).
 
 Alternatively, build and run **PeggleHD.xcodeproj** with your own Apple development team.
 
-The deployment target is iOS/iPadOS 15.0. Testing has focused on recent OS versions, iPhone Duo and a 13-inch iPad Pro. Older supported OS versions have not all been tested. Simulator builds target Apple silicon Macs.
+The deployment target is iOS/iPadOS 15.0. Testing has focused on recent OS versions, iPhone Duo, and a 13-inch iPad Pro. Older supported OS versions have not all been tested. Simulator builds target Apple silicon Macs.
 
 ## Build from Source
 *Written by AI agent*
