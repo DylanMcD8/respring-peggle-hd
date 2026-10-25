@@ -1,0 +1,24 @@
+.DS_Store
+.build/
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcresult/
+__pycache__/
+*.pyc
+Local.xcconfig
+.env
+.env.*
+*.mobileprovision
+*.p12
+*.p8
+*.key
+release-output/
+
+# Add app-specific private dependencies, signing directories, device data and
+# evidence paths. Do not ignore source required to build a fresh clone.
+
+target/
+*.cer
+*.log

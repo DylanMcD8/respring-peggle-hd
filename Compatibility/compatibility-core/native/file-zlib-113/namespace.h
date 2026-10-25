@@ -1,0 +1,32 @@
+/* Peggle compatibility integration: isolate every legacy global symbol.
+ * Original decoder source files remain byte-for-byte official zlib 1.1.3. */
+#define adler32 peggle113_adler32
+#define zlibVersion peggle113_zlibVersion
+#define zError peggle113_zError
+#define z_errmsg peggle113_z_errmsg
+#define zcalloc peggle113_zcalloc
+#define zcfree peggle113_zcfree
+#define inflate peggle113_inflate
+#define inflateEnd peggle113_inflateEnd
+#define inflateInit2_ peggle113_inflateInit2_
+#define inflateInit_ peggle113_inflateInit_
+#define inflateReset peggle113_inflateReset
+#define inflateSetDictionary peggle113_inflateSetDictionary
+#define inflateSync peggle113_inflateSync
+#define inflateSyncPoint peggle113_inflateSyncPoint
+#define inflate_blocks peggle113_inflate_blocks
+#define inflate_blocks_free peggle113_inflate_blocks_free
+#define inflate_blocks_new peggle113_inflate_blocks_new
+#define inflate_blocks_reset peggle113_inflate_blocks_reset
+#define inflate_blocks_sync_point peggle113_inflate_blocks_sync_point
+#define inflate_set_dictionary peggle113_inflate_set_dictionary
+#define inflate_copyright peggle113_inflate_copyright
+#define inflate_trees_bits peggle113_inflate_trees_bits
+#define inflate_trees_dynamic peggle113_inflate_trees_dynamic
+#define inflate_trees_fixed peggle113_inflate_trees_fixed
+#define inflate_codes peggle113_inflate_codes
+#define inflate_codes_free peggle113_inflate_codes_free
+#define inflate_codes_new peggle113_inflate_codes_new
+#define inflate_flush peggle113_inflate_flush
+#define inflate_mask peggle113_inflate_mask
+#define inflate_fast peggle113_inflate_fast

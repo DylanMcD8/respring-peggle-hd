@@ -1,0 +1,1 @@
+Anonymous version-25 fixtures: names/account text, scores, statistics, completion collections and unrelated fields are replaced with synthetic empty values. Adventure checkpoint fields exercise beginning-of-level transfer. These are not personal save files.

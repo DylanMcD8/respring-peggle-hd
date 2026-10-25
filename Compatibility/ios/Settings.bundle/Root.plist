@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>FooterText</key>
+			<string>When enabled, Peggle HD will offer the option to import or export save files before starting the game. This is useful if you need to sync save files across multiple devices.</string>
+			<key>Title</key>
+			<string>Save Files</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>PeggleShowSaveManagementOnLaunch</string>
+			<key>Title</key>
+			<string>Show Save File Management on Launch</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Link your selected in-game user using Enable Automatic iCloud Syncing in Manage Save Files first. Adventure checkpoints, cleared and aced levels, and challenge trophies sync through one shared iCloud save file for your Apple Account. Linking different users combines their completed levels and trophies. During play, incoming changes offer Apply and Restart or Later. Scores, statistics, and unfinished shots stay on this device.</string>
+			<key>Title</key>
+			<string>iCloud Save Files</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>PeggleAutomaticProgressSync</string>
+			<key>Title</key>
+			<string>Automatically Sync Save Files (Experimental)</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>When enabled, the game will render up to 60 FPS, or 120 FPS on ProMotion displays. When disabled, it uses the app's original 30 FPS.</string>
+			<key>Title</key>
+			<string>Rendering</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>PeggleAllowHighRefresh</string>
+			<key>Title</key>
+			<string>Unlock Frame Rate</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>The Peggle Nights IAP has been activated since it is no longer available for purchase otherwise. By default, this would theme the entire app after Nights, but to keep a more classic experience, you can disable the theming.</string>
+			<key>Title</key>
+			<string>Peggle Nights</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>PeggleShowNightsTheme</string>
+			<key>Title</key>
+			<string>Show Peggle Nights Theme</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>

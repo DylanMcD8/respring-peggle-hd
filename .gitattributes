@@ -1,0 +1,6 @@
+Vendor/** -text
+Original/** -text
+*.png -text
+*.dylib -text
+*.ttf -text
+*.bin -text

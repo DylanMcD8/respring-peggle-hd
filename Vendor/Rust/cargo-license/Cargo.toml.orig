@@ -1,0 +1,23 @@
+[package]
+name = "cargo-license"
+description = "Cargo subcommand to see license of dependencies"
+authors = ["Onur Aslan <onur@onur.im>"]
+version = "0.5.1"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/onur/cargo-license"
+edition = "2021"
+
+[dependencies]
+getopts = "0.2.21"
+toml = "0.5.8"
+ansi_term = "0.12.1"
+csv = "1"
+serde = "1"
+serde_derive = "1"
+serde_json = "1"
+cargo_metadata = "0.15.0"
+semver = "1.0"
+clap = { version =  "3.1.17", features = ["derive"] }
+atty = "0.2"
+anyhow = "1"

@@ -1,0 +1,254 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+//! Prints copyright, authorship and license information.
+
+const MAIN_COPYRIGHT: &str = "
+touchHLE © 2023–2026 touchHLE project contributors.
+";
+
+const MAIN_LICENSE: &str = "
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+";
+
+// See android/app/src/main/java/org/touchhle/android/DocumentsProvider.kt
+#[cfg(target_os = "android")]
+const SKYLINE: &str = "
+touchHLE for Android incorporates code originally from the Skyline emulator
+project, licensed under MPL-2.0:
+
+Copyright © 2022 Skyline Team and Contributors (https://github.com/skyline-emu/)
+";
+
+const RUST_DESCRIPTION: &str = "
+touchHLE, and therefore this executable, incorporates the following Rust
+libraries, which are copyright their respective authors and other contributors,
+and licensed as follows:
+";
+
+/// Names, versions, authors and licenses of Rust crates depended on by release
+/// binaries. See `build.rs` for how this is generated.
+const RUST_DEPENDENCIES: &str = include_str!(concat!(env!("OUT_DIR"), "/rust_dependencies.txt"));
+
+const SDL2_DESCRIPTION: &str = "
+touchHLE, and therefore this executable, incorporates the library SDL 2, which
+is available under the following license:
+";
+
+const SDL2_LICENSE: &str = "
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+";
+
+const OPENAL_SOFT: &str = "
+touchHLE, and therefore this executable, incorporates the library OpenAL Soft,
+which is available under the terms of the GNU Library Public License version 2
+or any later version.
+";
+
+const STB_IMAGE: &str = "
+touchHLE, and therefore this executable, incorporates the library stb_image,
+which is available either as Public Domain or under the terms of the MIT
+license.
+";
+
+const PVRTD_DESCRIPTION: &str = "
+touchHLE, and therefore this executable, incorporates PVRTC decompression code
+from the PowerVR SDK, which is available under the following license:
+";
+
+const PVRTD_LICENSE: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/vendor/PVRTDecompress/LICENSE.md"
+));
+
+// When resource files are bundled with touchHLE in such a way that the user can
+// read their license files directly, use this caveat.
+
+const EXTERNAL_FILES_CAVEAT: &str = "
+The following authorship, copyright and license information relates to this
+touchHLE executable. Please note that different licensing terms apply to source
+files and to the bundled dynamic libraries (in touchHLE_dylibs/) and fonts (in
+touchHLE_fonts/). Please consult the respective files/directories for more
+information.
+";
+
+// When resource files are bundled with touchHLE in such a way that only
+// touchHLE can read the license file, use these notices.
+
+// Apple is mentioned because the GPLv2 allows repeating the original source
+// code offer when non-commercially redistributing binaries.
+const INTERNAL_FSF_DYLIBS_DESCRIPTION: &str = "
+This distribution of touchHLE includes binaries for the libgcc and libstdc++
+libraries from the Free Software Foundation, as originally distributed by Apple:
+";
+
+const INTERNAL_ZLIB_DYLIB_DESCRIPTION: &str = "
+This distribution of touchHLE includes binaries for zlib (libz), available under
+the following license:
+";
+
+// We have a COPYING file for SQLite, but as the main source and resulting
+// binary are simply Public Domain, we can save some space here.
+const INTERNAL_SQLITE3_DYLIB_DESCRIPTION: &str = "
+This distribution of touchHLE includes binaries for SQLite (libsqlite3),
+available under Public Domain.
+";
+
+const INTERNAL_XML2_DYLIB_DESCRIPTION: &str = "
+This distribution of touchHLE includes binaries for libxml2, available under
+the following license:
+";
+
+const INTERNAL_LIBERATION_FONTS_DESCRIPTION: &str = "
+This distribution of touchHLE includes Liberation Sans fonts, available under
+the following license:
+";
+
+const INTERNAL_NOTO_FONTS_DESCRIPTION: &str = "
+This distribution of touchHLE includes Noto Sans CJK fonts, available under the
+following license:
+";
+
+fn read_bundled_file(path: &str) -> String {
+    use std::io::Read;
+    let mut res = String::new();
+    crate::paths::ResourceFile::open(path)
+        .unwrap()
+        .get()
+        .read_to_string(&mut res)
+        .unwrap();
+    res
+}
+
+fn divider(out: &mut String) -> Result<(), std::fmt::Error> {
+    use std::fmt::Write;
+    writeln!(out, "---")
+}
+
+fn print(out: &mut String, resources_are_external_files: bool) -> Result<(), std::fmt::Error> {
+    use std::fmt::Write;
+    if resources_are_external_files {
+        writeln!(out, "{EXTERNAL_FILES_CAVEAT}")?;
+        divider(out)?;
+    }
+    writeln!(out, "{MAIN_COPYRIGHT}")?;
+    divider(out)?;
+    writeln!(out, "{MAIN_LICENSE}")?;
+    divider(out)?;
+    #[cfg(target_os = "android")]
+    {
+        writeln!(out, "{SKYLINE}")?;
+        divider(out)?;
+    }
+    writeln!(out, "{RUST_DESCRIPTION}")?;
+    writeln!(out, "{RUST_DEPENDENCIES}")?;
+    divider(out)?;
+    writeln!(out, "CPU interpreter derived from moleworld-dev/touchhle-arm-interpreter, MPL-2.0; license retained in src/cpu/interpreter/LICENSE.")?;
+    writeln!(out, "{SDL2_DESCRIPTION}")?;
+    writeln!(out, "{SDL2_LICENSE}")?;
+    divider(out)?;
+    writeln!(out, "{OPENAL_SOFT}")?;
+    divider(out)?;
+    writeln!(out, "{STB_IMAGE}")?;
+    divider(out)?;
+    writeln!(out, "{PVRTD_DESCRIPTION}")?;
+    writeln!(out, "{}", PVRTD_LICENSE.trim_end())?;
+    if !resources_are_external_files {
+        divider(out)?;
+        writeln!(out, "{INTERNAL_FSF_DYLIBS_DESCRIPTION}")?;
+        writeln!(
+            out,
+            "{}.",
+            read_bundled_file(&format!("{}/README.md", crate::paths::DYLIBS_DIR))
+                // Skip preamble
+                .split_once("## Original Apple license acknowledgements")
+                .unwrap()
+                .1
+                // Don't include the whole GPL
+                .split_once("; a copy of the GPL is included below.")
+                .unwrap()
+                .0
+                // Remove one level of Markdown quoting
+                .replace("\n> ", "\n")
+                .trim_start()
+        )?;
+        divider(out)?;
+        writeln!(out, "{INTERNAL_ZLIB_DYLIB_DESCRIPTION}")?;
+        writeln!(
+            out,
+            "{}",
+            read_bundled_file(&format!("{}/COPYING.libz", crate::paths::DYLIBS_DIR))
+        )?;
+        divider(out)?;
+        writeln!(out, "{INTERNAL_SQLITE3_DYLIB_DESCRIPTION}")?;
+        divider(out)?;
+        writeln!(out, "{INTERNAL_XML2_DYLIB_DESCRIPTION}")?;
+        writeln!(
+            out,
+            "{}",
+            read_bundled_file(&format!("{}/COPYING.libxml2", crate::paths::DYLIBS_DIR))
+        )?;
+        divider(out)?;
+        writeln!(out, "{INTERNAL_LIBERATION_FONTS_DESCRIPTION}")?;
+        writeln!(
+            out,
+            "{}",
+            read_bundled_file(&format!("{}/LICENSE.liberation", crate::paths::FONTS_DIR))
+        )?;
+        divider(out)?;
+        writeln!(out, "{INTERNAL_NOTO_FONTS_DESCRIPTION}")?;
+        writeln!(
+            out,
+            "{}",
+            read_bundled_file(&format!("{}/LICENSE.noto", crate::paths::FONTS_DIR))
+        )?;
+    }
+    Ok(())
+}
+
+pub fn get_text() -> String {
+    let mut string = String::new();
+    print(&mut string, crate::paths::RESOURCES_ARE_EXTERNAL_FILES).unwrap();
+    string
+}
+
+#[cfg(test)]
+#[test]
+fn test_external_files_license_text() {
+    // The code above makes assumptions about the content of external files that
+    // aren't checked at build time, and the runtime check only happens when you
+    // view the license text on Android! This seems likely to silently break,
+    // so it's a good candidate for a unit test.
+    print(
+        &mut String::new(),
+        /* resources_are_external_files: */ true,
+    )
+    .unwrap();
+}

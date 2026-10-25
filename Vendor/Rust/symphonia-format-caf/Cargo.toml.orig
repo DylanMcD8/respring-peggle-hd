@@ -1,0 +1,19 @@
+[package]
+name = "symphonia-format-caf"
+description = "Pure Rust CAF demuxer (a part of project Symphonia)."
+authors = ["Ian Hobson <ian.r.hobson@gmail.com>", "Philip Deljanov <philip.deljanov@gmail.com>"]
+readme = "README.md"
+categories = ["multimedia", "multimedia::audio", "multimedia::encoding"]
+keywords = ["audio", "media", "demuxer", "caf"]
+# Common package metadata located in workspace Cargo.toml.
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+log = { workspace = true }
+symphonia-common = { version = "0.6.0", path = "../symphonia-common" }
+symphonia-core = { version = "0.6.0", path = "../symphonia-core" }

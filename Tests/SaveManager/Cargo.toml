@@ -1,0 +1,13 @@
+[package]
+name="peggle_save_manager_c49_tests"
+version="0.0.0"
+edition="2021"
+[workspace]
+[lib]
+path="src/lib.rs"
+[dependencies]
+serde_json="=1.0.91"
+zip={version="=0.6.4",default-features=false,features=["deflate"]}
+plist="=1.8.0"
+libc="=0.2.180"
+uuid={version="=1.2.2",default-features=false,features=["v4"]}

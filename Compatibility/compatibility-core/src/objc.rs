@@ -1,0 +1,182 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+//! Objective-C runtime.
+//!
+//! Apple's [Programming with Objective-C](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
+//! is a useful introduction to the language from a user's perspective.
+//! There are further resources in the child modules of this module, but they
+//! are more implementation-specific.
+//!
+//! The strategy for this emulator will be to provide our own implementations of
+//! an Objective-C runtime and libraries for it (Foundation etc). These
+//! implementations will be "host code": Rust code forming part of the emulator,
+//! not emulated code. The runtime will need to be able to handle classes that
+//! originate from the guest app, classes defined by the host, and sometimes
+//! classes that are both (considering Objective-C's support for inheritance,
+//! categories and dynamic class editing).
+
+use crate::dyld::{export_c_func, ConstantExports, FunctionExports, HostConstant, HostDylib};
+use crate::objc::messages::ThreadInitializer;
+use crate::MutexId;
+use std::collections::HashMap;
+
+mod classes;
+mod blocks;
+mod messages;
+mod methods;
+mod objects;
+mod properties;
+mod selectors;
+mod synchronization;
+
+pub use classes::{objc_classes, Class, ClassExports, ClassTemplate};
+pub use messages::{
+    autorelease, msg, msg_class, msg_send, msg_send_no_initialize, msg_send_no_type_checking,
+    msg_send_super2, msg_super, objc_super, release, retain,
+};
+pub use methods::{HostIMP, IMP};
+pub use objects::{
+    id, impl_HostObject_with_superclass, nil, AnyHostObject, HostObject, TrivialHostObject,
+};
+pub use properties::todo_objc_setter;
+pub use selectors::{selector, SEL};
+
+use crate::mem::MutPtr;
+use crate::Environment;
+use classes::{
+    class_getInstanceSize, class_getProperty, class_getSuperclass,
+    class_replaceMethod, objc_getClass, ClassHostObject, FakeClass, UnimplementedClass,
+};
+pub(crate) use classes::class_getMethodImplementation;
+pub(crate) use messages::objc_msgSend;
+use messages::{objc_msgSendSuper2, objc_msgSend_stret, MsgSendSignature, MsgSendSuperSignature};
+use methods::method_list_t;
+use objects::{objc_object, object_getClass, object_setClass, HostObjectEntry};
+use properties::{ivar_list_t, objc_copyStruct, objc_getProperty, objc_setProperty};
+use selectors::sel_registerName;
+use synchronization::{objc_sync_enter, objc_sync_exit};
+
+/// Typedef for `NSZone *`. This is a [fossil type] found in the signature of
+/// `allocWithZone:` and similar methods. Its value is always ignored.
+///
+/// [fossil type]: https://en.wiktionary.org/wiki/fossil_word
+pub type NSZonePtr = crate::mem::MutVoidPtr;
+
+/// Main type holding Objective-C runtime state.
+pub struct ObjC {
+    blocks: blocks::State,
+    /// Known selectors (interned method name strings).
+    selectors: HashMap<String, SEL>,
+
+    /// Mapping of known (guest) object pointers to their host objects.
+    ///
+    /// If an object isn't in this map, we will consider it not to exist.
+    objects: HashMap<id, HostObjectEntry>,
+
+    /// Known classes.
+    ///
+    /// Look at the `isa` to get the metaclass for a class.
+    classes: HashMap<String, Class>,
+
+    /// Mutexes used in @synchronized blocks (objc_sync_enter/exit).
+    sync_mutexes: HashMap<id, MutexId>,
+
+    /// Mutexes for running the +initialize function.
+    initializer_threads: HashMap<id, ThreadInitializer>,
+
+    /// Temporary storage for optional type information when sending a message.
+    /// Type information isn't part of the `objc_msgSend` ABI, so an alternative
+    /// channel is needed.
+    message_type_info: Option<(std::any::TypeId, &'static str)>,
+}
+
+impl ObjC {
+    pub fn new() -> ObjC {
+        ObjC {
+            blocks: Default::default(),
+            selectors: HashMap::new(),
+            objects: HashMap::new(),
+            classes: HashMap::new(),
+            sync_mutexes: HashMap::new(),
+            initializer_threads: HashMap::new(),
+            message_type_info: None,
+        }
+    }
+}
+
+pub const DYLIB: HostDylib = HostDylib {
+    path: "/usr/lib/libobjc.A.dylib",
+    aliases: &["/usr/lib/libobjc.dylib"],
+    class_exports: &[blocks::CLASSES],
+    constant_exports: &[CONSTANTS, blocks::CONSTANTS],
+    function_exports: &[FUNCTIONS, blocks::FUNCTIONS],
+};
+
+const CONSTANTS: ConstantExports = &[
+    // We don't use these in our Objective-C runtime, but exporting useless
+    // symbols for these silences the warning about the unhandled relocation,
+    // and avoids a linker error for the integration tests.
+    ("__objc_empty_vtable", HostConstant::NullPtr),
+    ("__objc_empty_cache", HostConstant::NullPtr),
+];
+
+/// Block support is iOS 4+, but it seems like Block Runtime Helpers
+/// could still be called on even if minimal iOS version is set to 3.x?
+///
+/// ref. <https://clang.llvm.org/docs/Block-ABI-Apple.html#runtime-helper-functions>
+const FUNCTIONS: FunctionExports = &[
+    export_c_func!(objc_retain(_)),
+    export_c_func!(objc_release(_)),
+    export_c_func!(objc_autorelease(_)),
+    export_c_func!(objc_autoreleaseReturnValue(_)),
+    export_c_func!(objc_retainAutoreleasedReturnValue(_)),
+    export_c_func!(objc_retainAutorelease(_)),
+    export_c_func!(objc_retainAutoreleaseReturnValue(_)),
+    export_c_func!(objc_storeStrong(_, _)),
+    export_c_func!(objc_autoreleasePoolPush()),
+    export_c_func!(objc_autoreleasePoolPop(_)),
+    export_c_func!(class_getInstanceSize(_)),
+    export_c_func!(class_getSuperclass(_)),
+    export_c_func!(class_getProperty(_, _)),
+    export_c_func!(class_getMethodImplementation(_, _)),
+    export_c_func!(class_replaceMethod(_, _, _, _)),
+    export_c_func!(objc_msgSend(_, _)),
+    export_c_func!(objc_msgSend_stret(_, _, _)),
+    export_c_func!(objc_msgSendSuper2(_, _)),
+    export_c_func!(objc_getClass(_)),
+    export_c_func!(objc_getProperty(_, _, _, _)),
+    export_c_func!(objc_setProperty(_, _, _, _, _, _)),
+    export_c_func!(objc_copyStruct(_, _, _, _, _)),
+    export_c_func!(objc_sync_enter(_)),
+    export_c_func!(objc_sync_exit(_)),
+    export_c_func!(object_getClass(_)),
+    export_c_func!(object_setClass(_, _)),
+    export_c_func!(sel_registerName(_)),
+];
+
+// ARC's return-value handoff is an optimization. These ordinary retain and
+// autorelease fallbacks implement the specified ownership semantics without
+// depending on the caller's ARM instruction sequence.
+fn objc_retain(env: &mut Environment, object: id) -> id { retain(env, object) }
+fn objc_release(env: &mut Environment, object: id) { release(env, object) }
+fn objc_autorelease(env: &mut Environment, object: id) -> id { autorelease(env, object) }
+fn objc_autoreleaseReturnValue(env: &mut Environment, object: id) -> id { autorelease(env, object) }
+fn objc_retainAutoreleasedReturnValue(env: &mut Environment, object: id) -> id { retain(env, object) }
+fn objc_retainAutorelease(env: &mut Environment, object: id) -> id {
+    retain(env, object);
+    autorelease(env, object)
+}
+fn objc_retainAutoreleaseReturnValue(env: &mut Environment, object: id) -> id {
+    objc_retainAutorelease(env, object)
+}
+fn objc_storeStrong(env: &mut Environment, location: MutPtr<id>, object: id) {
+    let previous = env.mem.read(location);
+    retain(env, object);
+    env.mem.write(location, object);
+    release(env, previous);
+}
+fn objc_autoreleasePoolPush(env: &mut Environment) -> id { msg_class![env; NSAutoreleasePool new] }
+fn objc_autoreleasePoolPop(env: &mut Environment, pool: id) { msg![env; pool drain] }

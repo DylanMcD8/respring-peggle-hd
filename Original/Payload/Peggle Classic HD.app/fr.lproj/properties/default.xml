@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Properties>
+
+<!-- AUTOGEN: Wonka | C:\Projects\PeggleNights_iPhone\wonka\cpp | Fri Aug 20 14:03:08 2010 | out:delta ref:default.xml -->
+<!-- File: AdventureScreen.cpp -->
+	<String id="595">Retour</String><!-- AdventureStatsWidget::Draw:259 -->
+<!-- File: BlitzHighScoreDialog.cpp -->
+	<String id="596">Jouer</String><!-- Line 36 -->
+	<String id="597">Retour</String><!-- Line 37 -->
+<!-- File: CharacterDialog.cpp -->
+	<String id="598">Électroboule</String><!-- Line 65 -->
+    <String id="1012">SUIVANT</String><!-- Line 114 -->
+    <String id="1013">TERMINé</String><!-- Line 128 -->
+<!-- File: EndLevelDialog.cpp -->
+	<String id="101">Tu te débrouilles très bien. &nbsp;Continue comme ça au niveau suivant&nbsp;!</String><!-- EndLevelDialog::Init:232 -->
+	<String id="599">Gagne un trophée !</String><!-- EndLevelDialog::Init:238 -->
+	<String id="600">Gagne un trophée !</String><!-- EndLevelDialog::Init:284 -->
+	<String id="601">Section suivante</String><!-- EndLevelDialog::Init:308 -->
+	<String id="602">Acheter maintenant</String><!-- EndLevelDialog::Init:320 -->
+	<String id="603">Tu as dépassé la limite de&nbsp;</String><!-- EndLevelDialog::Init:349 -->
+	<String id="604">&nbsp;points.&cr;&cr;</String><!-- EndLevelDialog::Init:349 -->
+	<String id="605">Tu n'as pas obtenu&nbsp;</String><!-- EndLevelDialog::Init:361 -->
+	<String id="606">&nbsp;points de style.&cr;&cr;</String><!-- EndLevelDialog::Init:361 -->
+	<String id="607">Tu n&apos;as pas éliminé tous les taquets orange du niveau.&cr;&cr;</String><!-- EndLevelDialog::Init:365 -->
+	<String id="608">Nouveau niveau</String><!-- EndLevelDialog::Init:387 -->
+	<String id="609">Acheter maintenant</String><!-- EndLevelDialog::Init:388 -->
+	<String id="610">Gagne un trophée !</String><!-- EndLevelDialog::Init:393 -->
+	<String id="611">Joue à 60 nouveaux niveaux de rêve dans quatre modes de jeu</String><!-- EndLevelDialog::InitTrialText:516 -->
+	<String id="612">Rencontre les alter ego des Maîtres de Peggle dans un nouveau mode Aventure</String><!-- EndLevelDialog::InitTrialText:517 -->
+	<String id="613">Relève l'ultime défi de Peggle et deviens un Grand Maître dans 60 nouveaux défis</String><!-- EndLevelDialog::InitTrialText:518 -->
+	<String id="614">Fais la connaissance de Marina, le nouveau Maître de Peggle et découvre son nouveau pouvoir magique, l'Électroboule !</String><!-- EndLevelDialog::InitTrialText:519 -->
+	<String id="615">Affiche tes talents d'exploseur de taquets avec 15 nouveaux trophées</String><!-- EndLevelDialog::InitTrialText:520 -->
+	<String id="616">Joue à 60 nouveaux niveaux de rêve dans quatre modes de jeu</String><!-- EndLevelDialog::InitTrialText:530 -->
+	<String id="617">Rencontre les alter ego des Maîtres de Peggle dans un nouveau mode Aventure</String><!-- EndLevelDialog::InitTrialText:531 -->
+	<String id="618">Relève l'ultime défi de Peggle et deviens un Grand Maître dans 60 nouveaux défis</String><!-- EndLevelDialog::InitTrialText:532 -->
+	<String id="619">Fais la connaissance de Marina, le nouveau Maître de Peggle et découvre son nouveau pouvoir magique, l'Électroboule !</String><!-- EndLevelDialog::InitTrialText:533 -->
+	<String id="620">Affiche tes talents d'exploseur de taquets avec 15 nouveaux trophées</String><!-- EndLevelDialog::InitTrialText:534 -->
+<!-- File: GameSelectDialog.cpp -->
+	<String id="621">Menu</String><!-- Line 29 -->
+<!-- File: HelpScreen.cpp -->
+	<String id="622">Tu peux également viser à l'aide de la nouvelle roue de défilement sur le côté de l'écran.</String><!-- Line 137 -->
+	<String id="623">Chaque niveau a un score pro. Bats ce score pour gagner un ruban rouge bonus ! Fais ça à tous les niveaux pour un trophée encore plus beau !</String><!-- Line 269 -->
+	<String id="624">PLUIE DE NOUV. BOULES</String><!-- Line 282 -->
+	<String id="625">5 000 / 2 500 points</String><!-- Line 283 -->
+	<String id="626">Fais rebondir la boule sur un (et un seul) taquet pour qu'elle arrive dans le Panier de récupération de boule.</String><!-- Line 284 -->
+	<String id="627">COUP DISTANT</String><!-- Line 287 -->
+	<String id="628">25 000 / 5 000 points</String><!-- Line 288 -->
+	<String id="629">Commence par toucher un taquet qui n'est pas bleu, puis parcours 1/3 de la largeur de l'écran et touche un autre taquet qui n'est pas bleu.</String><!-- Line 289 -->
+	<String id="630">DOUBLE COUP DISTANT</String><!-- Line 292 -->
+	<String id="631">25 000 / 10 000 points</String><!-- Line 293 -->
+	<String id="632">Obtiens un COUP DISTANT puis parcours 1/3 de la largeur de l'écran et touche un troisième taquet qui n'est pas bleu.</String><!-- Line 294 -->
+	<String id="633">COUP SUPER DISTANT</String><!-- Line 298 -->
+	<String id="634">50 000 / 10 000 points</String><!-- Line 299 -->
+	<String id="635">Commence par toucher un taquet qui n'est pas bleu, puis parcours 2/3 de la largeur de l'écran et touche un autre taquet qui n'est pas bleu.</String><!-- Line 300 -->
+	<String id="636">GLISSADE EXTRÊME</String><!-- Line 311 -->
+	<String id="637">50 000 / 5 000 points</String><!-- Line 312 -->
+	<String id="638">Glisse au-delà d'une certaine vitesse pendant 12 taquets.</String><!-- Line 313 -->
+	<String id="639">SUR LE MUR</String><!-- Line 316 -->
+	<String id="640">25 000 / 5 000 points</String><!-- Line 317 -->
+	<String id="641">Fais rebondir la boule sur le mur, parcours 1/5 de la largeur de l'écran et touche un taquet qui n'est pas bleu.</String><!-- Line 318 -->
+	<String id="642">PANIER</String><!-- Line 321 -->
+	<String id="643">25 000 / 5 000 points</String><!-- Line 322 -->
+	<String id="644">Fais rebondir la boule sur le Panier de récupération de boule pour toucher le dernier taquet orange et avoir la Fever.</String><!-- Line 323 -->
+	<String id="645">REBOND FAVORABLE</String><!-- Line 326 -->
+	<String id="646">25 000 / 2 500 points</String><!-- Line 327 -->
+	<String id="647">Fais rebondir la boule sur le Panier puis attrape-là de nouveau.</String><!-- Line 328 -->
+	<String id="648">FORMIDAAABLE</String><!-- Line 339 -->
+	<String id="649">25 000 / 5 000 points</String><!-- Line 340 -->
+	<String id="650">Fais tomber 5 boules de suite dans le Panier de récupération de boule.</String><!-- Line 341 -->
+	<String id="651">FORMI-FORMIDABLE</String><!-- Line 344 -->
+	<String id="652">100 000 / &nbsp;&nbsp;- &nbsp;&nbsp;points</String><!-- Line 345 -->
+	<String id="653">Fais tomber 10 boules de suite dans le Panier de récupération de boule.</String><!-- Line 346 -->
+	<String id="654">ATTAQUE ORANGE</String><!-- Line 349 -->
+	<String id="655">50 000 / 5 000 points</String><!-- Line 350 -->
+	<String id="656">Touche un pourcentage élevé de taquets orange restants en un coup.</String><!-- Line 351 -->
+	<String id="657">COUP DE BALAI</String><!-- Line 354 -->
+	<String id="658">50 000 / &nbsp;&nbsp;- &nbsp;&nbsp;points</String><!-- Line 355 -->
+	<String id="659">Obtiens la Ultra Extreme Fever (en éliminant tous les taquets) en un coup qui touche au moins deux taquets.</String><!-- Line 356 -->
+	<String id="660">FOLIE DU MULTIBALL</String><!-- Line 367 -->
+	<String id="661">25 000 / 5 000 points</String><!-- Line 368 -->
+	<String id="662">Obtiens le Multiball après avoir touché le dernier taquet orange pour avoir la Fever.</String><!-- Line 369 -->
+	<String id="663">FRÉNÉSIE DE BOULES</String><!-- Line 372 -->
+	<String id="664">100 000 / 10 000 points</String><!-- Line 373 -->
+	<String id="665">Fais tomber plusieurs boules dans le Panier en un coup.</String><!-- Line 374 -->
+	<String id="666">FLIPPER MANIA</String><!-- Line 377 -->
+	<String id="667">25 000 / 5 000 points</String><!-- Line 378 -->
+	<String id="668">Touche au moins quatre fois un taquet avec le Flipper.</String><!-- Line 379 -->
+	<String id="669">CHOC ÉLECTRIQUE</String><!-- Line 382 -->
+	<String id="670">25 000 / 5 000 points</String><!-- Line 383 -->
+	<String id="671">Détruis au moins douze taquets avec l'Électroboule.</String><!-- Line 384 -->
+	<String id="672">L'OEIL DE LA PYRAMIDE</String><!-- Line 397 -->
+	<String id="673">10 000 / 5 000 points</String><!-- Line 398 -->
+	<String id="674">Fais tomber une boule dans le Panier de récupération de boule sans toucher les amortisseurs de la pyramide.</String><!-- Line 399 -->
+	<String id="675">COLLECTÉ EN PYRAMIDE</String><!-- Line 402 -->
+	<String id="676">10 000 / 5 000 points</String><!-- Line 403 -->
+	<String id="677">Fais rebondir une boule sur la Pyramide pour tomber dans le Panier de récupération de boule.</String><!-- Line 404 -->
+	<String id="678">COUP DU CHAPEAU</String><!-- Line 407 -->
+	<String id="679">10 000 / 2 500 points</String><!-- Line 408 -->
+	<String id="680">Fais tomber une boule coiffée du Chapeau magique dans le Panier.</String><!-- Line 409 -->
+	<String id="681">CHAUD DEVANT</String><!-- Line 412 -->
+	<String id="682">25 000 / 5 000 points</String><!-- Line 413 -->
+	<String id="683">Fais rebondir une boule de feu sur le couvercle du Panier de récupération de boule puis fais-la atterrir dans le Panier.</String><!-- Line 414 -->
+	<String id="684">Certains types de coups te feront gagner des points bonus. Le second score affiché est spécifique au mode Duel.</String><!-- Line 460 -->
+	<String id="685">Certains types de coups te feront gagner des points bonus. Le second score affiché est spécifique au mode Duel.</String><!-- Line 464 -->
+	<String id="686">Certains types de coups te feront gagner des points bonus. Le second score affiché est spécifique au mode Duel.</String><!-- Line 468 -->
+	<String id="687">Chaque Maître a un Coup stylé spécial obtenu en touchant les deux taquets verts avec le même tir. Et certains Maîtres ont plus d'un coup dans leur sac !</String><!-- Line 472 -->
+	<String id="688">Chaque Maître a un Coup stylé spécial obtenu en touchant les deux taquets verts avec le même tir. Et certains Maîtres ont plus d'un coup dans leur sac !</String><!-- Line 476 -->
+	<String id="689">Coups stylés</String><!-- Line 667 -->
+	<String id="690">Plus de Coups stylés</String><!-- Line 668 -->
+	<String id="691">Encore plus de Coups stylés</String><!-- Line 669 -->
+	<String id="692">Coups stylés des Maîtres</String><!-- Line 670 -->
+	<String id="693">Encore plus de Coups stylés des Maîtres</String><!-- Line 671 -->
+    <String id="1030">AVENTURE</String><!-- Line 505 -->
+    <String id="1031">JEU RAPIDE</String><!-- Line 506 -->
+    <String id="1032">DUEL</String><!-- Line 507 -->
+    <String id="1033">DÉFI</String><!-- Line 508 -->
+   
+<!-- File: HighScoreDialog.cpp -->
+	<String id="694">Records</String><!-- Line 16 -->
+<!-- File: InterfaceMgr.cpp -->
+	<String id="695">Défi %d/%d</String><!-- InterfaceMgr::DrawTrophyMode:755 -->
+	<String id="696">Défi %d/%d</String><!-- InterfaceMgr::DrawTrophyMode:759 -->
+	<String id="697">Défi %dK/%dK</String><!-- InterfaceMgr::DrawTrophyMode:763 -->
+	<String id="698">&cr;Points de style&cr;</String><!-- InterfaceMgr::UpdateMarquees:1504 -->
+	<String id="699">&cr;Coups stylés uniques&cr;%d</String><!-- InterfaceMgr::UpdateMarquees:1508 -->
+	<String id="700">Défi</String><!-- InterfaceMgr::UpdateMarquees:1516 -->
+<!-- File: LevelScreen.cpp -->
+	<String id="701">Version d'essai Peggle Nights</String><!-- LevelScreen::DoBuyFullGameDialog:653 -->
+	<String id="702">Ce niveau n'est pas disponible dans la version d'essai. Déverrouille la version complète de Peggle Nights pour jouer à tous les nouveaux niveaux.</String><!-- LevelScreen::DoBuyFullGameDialog:654 -->
+	<String id="703">Retour</String><!-- LevelScreen::DoBuyFullGameDialog:658 -->
+	<String id="704">Acheter maintenant</String><!-- LevelScreen::DoBuyFullGameDialog:659 -->
+	<String id="705">Score pro :</String><!-- LevelScreen::SelectionChanged:901 -->
+<!-- File: LogicMgr.cpp -->
+	<String id="706">Pouvoir aléatoire</String><!-- LogicMgr::FinishSlotMachine:3502 -->
+	<String id="707">Chapeau magique !</String><!-- LogicMgr::FinishSlotMachine:3503 -->
+	<String id="708">Tripleur de score</String><!-- LogicMgr::FinishSlotMachine:3504 -->
+	<String id="709">Boule supplémentaire</String><!-- LogicMgr::FinishSlotMachine:3505 -->
+	<String id="710">Épouvantaboule !</String><!-- LogicMgr::DoPowerup:3638 -->
+	<String id="711">Boule Zen</String><!-- LogicMgr::DoPowerup:3663 -->
+	<String id="712">Boule de feu</String><!-- LogicMgr::DoPowerup:3680 -->
+	<String id="713">Électroboule</String><!-- LogicMgr::DoPowerup:3692 -->
+	<String id="714">Super Guide</String><!-- LogicMgr::DoPowerup:3700 -->
+	<String id="715">Flippers</String><!-- LogicMgr::DoPowerup:3706 -->
+	<String id="716">Pyramide</String><!-- LogicMgr::DoPowerup:3712 -->
+	<String id="717">Ralenti terminé !&cr;Touche le bouton ^FF0101^Arrêter^oldclr^ pour revenir au jeu.&cr;Touche le bouton ^4B69EF^Lire^oldclr^ pour revoir l'action.</String><!-- LogicMgr::UpdateLevelDone:7081 -->
+<!-- File: MainMenu.cpp -->
+	<String id="718">Déverrouiller le magasin</String><!-- MainMenu::Draw:517 -->
+	<String id="719">^FFFF00^MODE DÉFI VERROUILLÉ !^oldclr^&cr;Ce mode présente des défis pour les joueurs avancés.&cr;&cr;^FFFF00^Pour le déverrouiller :^oldclr^&cr;termine le mode Aventure de Peggle ou de Peggle Nights !</String><!-- MainMenu::ButtonDepress:772 -->
+	<String id="720">^FFFF00^MODE DÉFI VERROUILLÉ !^oldclr^&cr;Ce mode présente 60 défis pour les joueurs avancés.&cr;&cr;^FFFF00^Pour le déverrouiller :^oldclr^&cr;termine le mode Aventure de Peggle Nights !</String><!-- MainMenu::StartGame:888 -->
+	<String id="721">^FFFF00^MODE DÉFI VERROUILLÉ !^oldclr^&cr;Ce mode présente 40 défis pour les joueurs avancés.&cr;&cr;^FFFF00^Pour le déverrouiller :^oldclr^&cr;termine le mode Aventure de Peggle !</String><!-- MainMenu::StartGame:893 -->
+    <String id="1000">AVENTURE</String> <!-- Lines 103 & 177 -->
+    <String id="1001">JEU RAPIDE</String> <!-- Lines 116 & 189 -->
+    <String id="1002">DÉFI</String> <!-- Lines 128 & 202 -->
+    <String id="1003">DUEL</String> <!-- Lines 141 & 215 -->
+    <String id="1004">MAGASIN</String> <!-- Lines 156 & 230 -->
+    <String id="1020">Note-moi!!</String> <!-- Line 771 -->
+<!-- File: OptionsDialog.cpp -->
+	<String id="722">Effets sonores (off)</String><!-- Line 57 -->
+<!-- File: PlayerInfo.cpp -->
+	<String id="723"></String><!-- PlayerInfo::Reset:102 -->
+	<String id="724"></String><!-- PlayerInfo::SyncDetails:311 -->
+<!-- File: ProgressScreen.cpp -->
+	<String id="725">Retour</String><!-- ProgressScreen::GetPortraitSpeechInfo:227 -->
+<!-- File: Rateviewcontroller.cpp -->
+	<String id="1015">Peggle a besoin de toi!</String><!-- Line:96 -->
+    <String id="1016">NOTE</String><!-- Line:45 -->
+    <String id="1017">NOTE PLUS TARD</String><!-- Line:52 -->
+    <String id="1018">NON MERCI</String><!-- Line:56 -->
+    <String id="1019">Peggle a besoin de toi ! Tu penses que Peggle cartonne ? Cartonne à 5 étoiles ? Eh bien, voici ta chance de le proclamer au monde.</String><!-- Line:29 -->
+<!-- File: StoreScreen.cpp -->
+	<String id="726">Chargement...</String><!-- PriceButton::SetPrice:78 -->
+	<String id="727">Magasin Peggle</String><!-- *theApp, const std::string &theItem) : ThunderDialog:138 -->
+	<String id="728"></String><!-- *theApp, const std::string &theItem) : ThunderDialog:138 -->
+	<String id="729">Menu</String><!-- *theApp, const std::string &theItem) : ThunderDialog:138 -->
+	<String id="730">Restaurer</String><!-- *theApp, const std::string &theItem) : ThunderDialog:156 -->
+	<String id="731">Acheter maintenant pour %@</String><!-- StoreScreen::Update:263 -->
+	<String id="732">Tu possèdes déjà ce pack de jeu</String><!-- StoreScreen::Draw:289 -->
+	<String id="733">Tu possèdes déjà ce pack de jeu</String><!-- StoreScreen::Draw:293 -->
+	<String id="734">Merci de patienter</String><!-- StoreScreen::Draw:300 -->
+	<String id="735">Merci de patienter</String><!-- StoreScreen::Draw:303 -->
+    <String id="1009">RETOUR</String><!-- StoreScreen::StoreScreen:170 -->
+<!-- File: StoryScreen.cpp -->
+	<String id="736">Douze</String><!-- StoryScreen::Draw:1310 -->
+    <String id="1014">SUIVANT</String><!-- StoryScreen::StoryScreen:244 -->
+<!-- File: ThunderballApp.cpp -->
+	<String id="737">Peggle Nights disponible !</String><!-- ThunderballApp::DoPlayTrialScreen:2150 -->
+	<String id="738">Obtiens la suite de Peggle maintenant !</String><!-- ThunderballApp::DoPlayTrialScreen:2151 -->
+	<String id="739">Version d'essai</String><!-- ThunderballApp::DoPlayTrialScreen:2152 -->
+	<String id="740">Continuer</String><!-- ThunderballApp::DoPlayTrialScreen:2153 -->
+	<String id="741">Achète-le maintenant !</String><!-- ThunderballApp::DoPlayTrialScreen:2154 -->
+	<String id="742">Restaurer</String><!-- ThunderballApp::DoRestoreDescDialog:2201 -->
+	<String id="743">Utilise la fonction Restaurer pour déverrouiller ce pack de jeu si tu l&apos;as déjà acheté pour un autre périphérique.&cr;Restaurer le pack de jeu maintenant ?</String><!-- ThunderballApp::DoRestoreDescDialog:2202 -->
+	<String id="744">Non</String><!-- ThunderballApp::DoRestoreDescDialog:2206 -->
+	<String id="745">Oui</String><!-- ThunderballApp::DoRestoreDescDialog:2207 -->
+	<String id="746">Version d'essai de Peggle Nights</String><!-- ThunderballApp::DoFinishedTrialScreen:2225 -->
+	<String id="747">Déverrouille Peggle Nights pour continuer le mode Aventure. Retourne au menu principal et choisis Partie rapide pour rejouer aux niveaux gratuits de la version d'essai.</String><!-- ThunderballApp::DoFinishedTrialScreen:2226 -->
+	<String id="748">Menu</String><!-- ThunderballApp::DoFinishedTrialScreen:2230 -->
+	<String id="749">Acheter maintenant</String><!-- ThunderballApp::DoFinishedTrialScreen:2231 -->
+	<String id="750">Version d'essai de Peggle Nights</String><!-- ThunderballApp::DoNightsAdventureTrialComplete:2253 -->
+	<String id="751">Déverrouille Peggle Nights pour continuer le mode Aventure. Retourne au menu principal et choisis Partie rapide pour rejouer aux niveaux gratuits de la version d'essai.</String><!-- ThunderballApp::DoNightsAdventureTrialComplete:2254 -->
+	<String id="752">Retour</String><!-- ThunderballApp::DoNightsAdventureTrialComplete:2258 -->
+	<String id="753">Acheter maintenant</String><!-- ThunderballApp::DoNightsAdventureTrialComplete:2259 -->
+	<String id="754">Version d'essai de Peggle Nights</String><!-- ThunderballApp::DoNightsTrialIntroDialog:2279 -->
+	<String id="755">Joue à 5 niveaux de Peggle Nights gratuitement !</String><!-- ThunderballApp::DoNightsTrialIntroDialog:2279 -->
+	<String id="756">Continuer</String><!-- ThunderballApp::DoNightsTrialIntroDialog:2279 -->
+	<String id="757">Annuler</String><!-- ThunderballApp::DoConfirmMainMenuDialog:2872 -->
+	<String id="758">Annuler</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2929 -->
+	<String id="759">Tu peux sauvegarder tes meilleurs coups en utilisant l'icône ^00FF00^Caméra^oldclr^ en haut à droite de l'écran. Tu peux alors le revoir ici ou le partager avec un ami !</String><!-- ThunderballApp::DoTipDialog:3154 -->
+	<String id="760">Tu peux sauvegarder tes meilleurs coups en utilisant l'icône ^00FF00^Caméra^oldclr^ en haut à droite de l'écran. Tu peux alors le revoir ici ou le partager avec un ami !&cr;&cr;Tu n&apos;as enregistré aucun ralenti. Enregistre-les pendant que tu joues !</String><!-- ThunderballApp::DoTipDialog:3156 -->
+<!-- File: TrophyDetailsDialog.cpp -->
+	<String id="761">Meilleurs scores</String><!-- TrophyDetailsDialog::DrawContent:98 -->
+
+    <!-- File: ThumbnailDialog.cpp -->
+    <String id="1010">RETOUR</String><!-- Line 45 -->
+    <String id="1011">JOUER</String><!-- Line 33 -->
+    
+    
+<!-- File: TrophyRoom.cpp -->
+	<String id="762">Retour</String><!-- Line 64 -->
+<!-- File: UpdateAvailibleScreen.cpp -->
+	<String id="763">Mise à jour disponible !</String><!-- UpdateAvailibleWidget::Draw:69 -->
+	<String id="764">Oui</String><!-- UpdateAvailibleWidget::Draw:77 -->
+	<String id="765">Non</String><!-- UpdateAvailibleWidget::Draw:78 -->
+	<String id="766">Plus tard</String><!-- UpdateAvailibleWidget::Draw:79 -->
+	<String id="767">Menu</String><!-- UpdateAvailibleWidget::Draw:85 -->
+	<!-- !AUTOGEN -->
+	<String id="768">Multiball</String>
+	<String id="769">Frappe Spatiale</String>
+	<String id="770">Boule Babakool</String>
+
+	<!-- AUTOGEN: Wonka | c:\Tools\perl\peggle | Tue May 11 10:59:56 2010 | out:full -->
+<!-- File: AdventureScreen.cpp -->
+	<String id="0">Records</String><!-- AdventureStatsWidget::DrawHighScores:68 -->
+	<String id="1">%d.</String><!-- AdventureStatsWidget::DrawHighScores:94 -->
+	<String id="2">%d.</String><!-- AdventureStatsWidget::DrawHighScores:106 -->
+	<String id="3">Tes meilleurs scores</String><!-- AdventureStatsWidget::DrawPersonalHighScores:120 -->
+	<String id="4">%d.</String><!-- AdventureStatsWidget::DrawPersonalHighScores:157 -->
+	<String id="5">&nbsp;/ %d</String><!-- AdventureStatsWidget::DrawPersonalHighScores:188 -->
+	<String id="6">Tes stats actuelles en mode Aventure</String><!-- AdventureStatsWidget::DrawStats:203 -->
+	<String id="7">Tes statistiques totales</String><!-- AdventureStatsWidget::DrawStats:203 -->
+	<String id="8">Coups&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:217 -->
+	<String id="9">Boules Sup.&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:218 -->
+	<String id="10">Coups stylés&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:219 -->
+	<String id="11">Meilleur coup&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:220 -->
+	<String id="12">Meilleure fever&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:221 -->
+	<String id="13">Score total&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:227 -->
+	<String id="14">Nouvelles tentatives&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:228 -->
+	<String id="15">Défis terminés&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:232 -->
+	<String id="16">Niveaux terminés à 100&nbsp;%&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:233 -->
+	<String id="17">Trophées</String><!-- AdventureStatsWidget::Draw:257 -->
+	<String id="18">Menu</String><!-- AdventureStatsWidget::Draw:259 -->
+	<String id="19">Statistiques de %s</String><!-- AdventureScreen::Draw:337 -->
+	<String id="577">Niveaux réussis&nbsp;:</String><!-- AdventureStatsWidget::DrawStats:235 -->
+
+<!-- File: Board.cpp -->
+	<String id="20">Erreur de chargement du ralenti</String><!-- Board::ShowReplay:1202 -->
+	<String id="21">Une erreur s&apos;est produite lors du chargement du ralenti.</String><!-- Board::ShowReplay:1202 -->
+	<String id="22">OK</String><!-- Board::ShowReplay:1202 -->
+	<String id="23">Invalid _base Level</String><!-- Board::LoadLevelBase:2090 -->
+	<String id="24">Enregistrement du jeu non valide</String><!-- Board::LoadLevelBase:2092 -->
+	<String id="25">Erreur de chargement</String><!-- Board::LoadLevelBase:2095 -->
+	<String id="26">OK</String><!-- Board::LoadLevelBase:2095 -->
+	<String id="27">Charger le niveau</String><!-- Board::LoadLevel2:2170 -->
+	<String id="28">.dat</String><!-- Board::LoadLevel2:2177 -->
+	<String id="29">Saisir le nom</String><!-- Board::ChangeHighScore:2355 -->
+	<String id="30"></String><!-- Board::ChangeHighScore:2355 -->
+	<String id="31">Zoom activé</String><!-- Board::ActivateTypingCheck:3009 -->
+	<String id="32">Zoom désactivé</String><!-- Board::ActivateTypingCheck:3009 -->
+	<String id="33">L&apos;économiseur d&apos;écran Peggle reprendra dans</String><!-- Board::DrawScreenSaver:3311 -->
+	<String id="34">Autoplay %d</String><!-- Board::Draw:3628 -->
+	<String id="35">%d-%d &nbsp;%d%%</String><!-- Board::Draw:3635 -->
+	<String id="36">a triché</String><!-- Board::Draw:3645 -->
+	<String id="37">Record autorisé</String><!-- Board::Draw:3647 -->
+	<String id="38">Tapote deux fois pour quitter le zoom</String><!-- Board::DrawOverlay:3818 -->
+	<String id="493">Joueur2</String><!-- Board::SyncCharacterOptions:1694 -->
+	<String id="494">Ordinateur</String><!-- Board::SyncCharacterOptions:1718 -->
+	<String id="495">Zoom activé</String><!-- Board::ActivateTypingCheck:3009 -->
+	<String id="496">Zoom désactivé</String><!-- Board::ActivateTypingCheck:3009 -->
+	<String id="493">Joueur2</String><!-- Board::SyncCharacterOptions:1694 -->
+
+<!-- File: CharacterDialog.cpp -->
+	<String id="39"></String><!-- Line 49 -->
+	<String id="40">Super Guide</String><!-- Line 53 -->
+	<String id="41">Multiball</String><!-- Line 54 -->
+	<String id="42">Pyramide</String><!-- Line 55 -->
+	<String id="43">Frappe Spatiale</String><!-- Line 56 -->
+	<String id="44">Flippers</String><!-- Line 57 -->
+	<String id="45">Épouvantaboule</String><!-- Line 58 -->
+	<String id="46">Boule Babakool</String><!-- Line 59 -->
+	<String id="47">Roue de la chance</String><!-- Line 60 -->
+	<String id="48">Boule de feu</String><!-- Line 61 -->
+	<String id="49">Boule zen</String><!-- Line 62 -->
+	<String id="50">Aléatoire</String><!-- Line 63 -->
+	<String id="51">Choisis un adversaire</String><!-- Line 78 -->
+	<String id="52">Choisis un personnage</String><!-- Line 80 -->
+	<String id="53">Contre un ami</String><!-- Line 153 -->
+	<String id="54">Contre l&apos;ordi</String><!-- Line 154 -->
+	<String id="55">Facile</String><!-- Line 155 -->
+	<String id="56">Normal</String><!-- Line 156 -->
+	<String id="57">Difficile</String><!-- Line 157 -->
+	<String id="58">Maître</String><!-- Line 158 -->
+	<String id="59">Aléatoire</String><!-- CharacterDialog::DrawCharacterInfo:419 -->
+	<String id="60">Choisis un personnage au hasard.</String><!-- CharacterDialog::DrawCharacterInfo:420 -->
+	<String id="61">Choisis le joueur 1</String><!-- CharacterDialog::ButtonDepress:793 -->
+	<String id="62">Choisis le joueur 2</String><!-- CharacterDialog::ButtonDepress:803 -->
+	<String id="569">Ordinateur</String><!-- CharacterDialog::SaveDetails:687 -->
+	<String id="570">Joueur 2</String><!-- CharacterDialog::SaveDetails:689 -->
+<!-- File: CharacterMgr.cpp -->
+	<String id="63">Nom</String><!-- CharacterInfo::CharacterInfo:70 -->
+<!-- File: ContinueDialog.cpp -->
+	<String id="64">Continuer le jeu&nbsp;?</String><!-- Line 22 -->
+	<String id="65">Annuler</String><!-- Line 23 -->
+	<String id="66">Continuer</String><!-- Line 31 -->
+	<String id="67">Recommencer</String><!-- Line 32 -->
+	<String id="68">Continuer</String><!-- Line 36 -->
+	<String id="69">Nouveau jeu</String><!-- Line 37 -->
+<!-- File: CreditsScreen.cpp -->
+	<String id="70">Qui a Hu fait quoi ?</String><!-- CreditsScreen::Draw:153 -->
+    <String id="1007">RETOUR</String><!-- CreditsScreen::CreditsScreen:111 -->
+<!-- File: DebugScreen.cpp -->
+	<String id="71"></String><!-- Line 49 -->
+	<String id="72"></String><!-- Line 49 -->
+<!-- File: EffectMgr.cpp -->
+	<String id="73">Totalement raté&nbsp;!</String><!-- Effect::DrawCoinFlip:547 -->
+	<String id="74">fever&cr;ultra&cr;extreme</String><!-- Effect::DrawExtremeFever:1702 -->
+	<String id="75">Extrême&nbsp;!</String><!-- Effect::DrawJimmy:1965 -->
+	<String id="76">Direct&nbsp;!</String><!-- Effect::DrawJimmy:1966 -->
+	<String id="77">Radical&nbsp;!</String><!-- Effect::DrawJimmy:1967 -->
+	<String id="78">Grandiose&nbsp;!</String><!-- Effect::DrawJimmy:1968 -->
+	<String id="79">Truc de fou&nbsp;!</String><!-- Effect::DrawJimmy:1969 -->
+	<String id="80">Infernal&nbsp;!</String><!-- Effect::DrawJimmy:1970 -->
+	<String id="81">Oooh&nbsp;!</String><!-- Effect::DrawJimmy:1971 -->
+	<String id="82">Sensationnel&nbsp;!</String><!-- Effect::DrawJimmy:1972 -->
+	<String id="83">Formidable&nbsp;!</String><!-- Effect::DrawJimmy:1973 -->
+	<String id="84">Excellent&nbsp;!</String><!-- Effect::DrawJimmy:1974 -->
+	<String id="85">Sensass&nbsp;!</String><!-- Effect::DrawJimmy:1975 -->
+	<String id="86">Délicieux&nbsp;!</String><!-- Effect::DrawJimmy:1976 -->
+<!-- File: EndLevelDialog.cpp -->
+	<String id="94">Niveau terminé&nbsp;!</String><!-- EndLevelDialog::Init:180 -->
+	<String id="95">Niveau franchi&nbsp;!</String><!-- EndLevelDialog::Init:182 -->
+	<String id="96">Menu</String><!-- EndLevelDialog::Init:184 -->
+	<String id="97">Très bien&nbsp;!</String><!-- EndLevelDialog::Init:196 -->
+	<String id="98">Bravo&nbsp;! &nbsp;Tu as relevé le défi&nbsp;!</String><!-- EndLevelDialog::Init:197 -->
+	<String id="99">Menu des trophées</String><!-- EndLevelDialog::Init:198 -->
+	<String id="100">Niveau réussi&nbsp;!</String><!-- EndLevelDialog::Init:204 -->
+	<String id="101">Tu te débrouilles très bien. &nbsp;Continue comme ça au niveau suivant&nbsp;!</String><!-- EndLevelDialog::Init:205 -->
+	<String id="102">Continuer</String><!-- EndLevelDialog::Init:206 -->
+	<String id="103">Niveau terminé</String><!-- EndLevelDialog::Init:213 -->
+	<String id="104">Il te reste %d niveaux dans ce défi.</String><!-- EndLevelDialog::Init:219 -->
+	<String id="105">Il te reste 1 niveau dans ce défi.</String><!-- EndLevelDialog::Init:221 -->
+	<String id="106">Recommencer</String><!-- EndLevelDialog::Init:223 -->
+	<String id="107">Continuer</String><!-- EndLevelDialog::Init:224 -->
+	<String id="108">Continuer le défi&nbsp;?</String><!-- EndLevelDialog::Init:229 -->
+	<String id="109">Ce n&apos;est pas ce niveau qui t&apos;arrêtera. &nbsp;Tu peux le faire&nbsp;!</String><!-- EndLevelDialog::Init:230 -->
+	<String id="110">&cr;&cr;C&apos;est ta dernière vie.</String><!-- EndLevelDialog::Init:234 -->
+	<String id="111">&cr;&cr;Il te reste %d vies.</String><!-- EndLevelDialog::Init:236 -->
+	<String id="112">Recommencer</String><!-- EndLevelDialog::Init:239 -->
+	<String id="113">Continuer</String><!-- EndLevelDialog::Init:240 -->
+	<String id="114">Section terminée&nbsp;!</String><!-- EndLevelDialog::Init:248 -->
+	<String id="115">Continuer</String><!-- EndLevelDialog::Init:249 -->
+	<String id="116">Section terminée&nbsp;!</String><!-- EndLevelDialog::Init:256 -->
+	<String id="117">Continuer</String><!-- EndLevelDialog::Init:259 -->
+	<String id="118">Section suivante</String><!-- EndLevelDialog::Init:261 -->
+	<String id="119">Niveau suivant</String><!-- EndLevelDialog::Init:266 -->
+	<String id="120">Essaie encore&nbsp;!</String><!-- EndLevelDialog::Init:285 -->
+	<String id="121">Tu n&apos;as pas obtenu&nbsp;</String><!-- EndLevelDialog::Init:288 -->
+	<String id="122">&nbsp;points.&cr;&cr;</String><!-- EndLevelDialog::Init:288 -->
+	<String id="123">Tu n&apos;as pas éliminé tous les taquets du niveau.&cr;&cr;</String><!-- EndLevelDialog::Init:290 -->
+	<String id="124">Tu n&apos;as plus de vies.&cr;&cr;</String><!-- EndLevelDialog::Init:292 -->
+	<String id="125">Veux-tu recommencer le défi&nbsp;?</String><!-- EndLevelDialog::Init:294 -->
+	<String id="126">Recommencer défi</String><!-- EndLevelDialog::Init:295 -->
+	<String id="127">Essaie encore&nbsp;!</String><!-- EndLevelDialog::Init:299 -->
+	<String id="128">Recommencer</String><!-- EndLevelDialog::Init:301 -->
+	<String id="129">Jouer un nouveau niveau</String><!-- EndLevelDialog::Init:308 -->
+	<String id="130">Essaie encore&nbsp;!</String><!-- EndLevelDialog::Init:310 -->
+	<String id="131">Rejouer le niveau</String><!-- EndLevelDialog::Init:314 -->
+	<String id="132">Résultats</String><!-- EndLevelDialog::Init:319 -->
+	<String id="133">Nouveau record&nbsp;!</String><!-- EndLevelDialog::DrawHighScores:927 -->
+	<String id="134">Score total&nbsp;:</String><!-- EndLevelDialog::DrawStats:1044 -->
+	<String id="135">Score du niveau&nbsp;:</String><!-- EndLevelDialog::DrawStats:1048 -->
+	<String id="136">Score&nbsp;:</String><!-- EndLevelDialog::DrawStats:1048 -->
+	<String id="137">En 1 coup&nbsp;:</String><!-- EndLevelDialog::DrawStats:1057 -->
+	<String id="138">En 2 coups&nbsp;:</String><!-- EndLevelDialog::DrawStats:1058 -->
+	<String id="139">En 3 coups&nbsp;:</String><!-- EndLevelDialog::DrawStats:1059 -->
+	<String id="140">Bonus de réussite&nbsp;:</String><!-- EndLevelDialog::DrawStats:1060 -->
+	<String id="141">Coups&nbsp;:</String><!-- EndLevelDialog::DrawStats:1077 -->
+	<String id="142">Boules Sup.&nbsp;:</String><!-- EndLevelDialog::DrawStats:1078 -->
+	<String id="143">% éliminés&nbsp;:</String><!-- EndLevelDialog::DrawStats:1079 -->
+	<String id="144">Pts de coups&nbsp;:</String><!-- EndLevelDialog::DrawStats:1083 -->
+	<String id="145">Pts de Fever&nbsp;:</String><!-- EndLevelDialog::DrawStats:1084 -->
+	<String id="146">Pts de style&nbsp;:</String><!-- EndLevelDialog::DrawStats:1085 -->
+	<String id="147">Mode Aventure terminé&nbsp;!</String><!-- EndLevelDialog::DrawAdventureComplete:1137 -->
+	<String id="148">Nouvelles tentatives&nbsp;:</String><!-- EndLevelDialog::DrawAdventureComplete:1161 -->
+	<String id="149">Bonus d&apos;efficacité&nbsp;:</String><!-- EndLevelDialog::DrawAdventureComplete:1162 -->
+	<String id="150">Score final&nbsp;:</String><!-- EndLevelDialog::DrawAdventureComplete:1163 -->
+	<String id="151">Match nul&nbsp;!</String><!-- EndLevelDialog::DrawTwoPlayerResult:1198 -->
+	<String id="152">%S gagne&nbsp;!</String><!-- EndLevelDialog::DrawTwoPlayerResult:1204 -->
+	<String id="153">%S gagne&nbsp;!</String><!-- EndLevelDialog::DrawTwoPlayerResult:1206 -->
+	<String id="154">Gains&nbsp;:</String><!-- EndLevelDialog::DrawTwoPlayerResult:1260 -->
+	<String id="155">Victoire&nbsp;:</String><!-- EndLevelDialog::DrawTwoPlayerResult:1261 -->
+	<String id="156">Fevers&nbsp;:</String><!-- EndLevelDialog::DrawTwoPlayerResult:1262 -->
+	<String id="157">Points&nbsp;:</String><!-- EndLevelDialog::DrawTwoPlayerResult:1264 -->
+	<String id="578">&nbsp;réussi&nbsp;!!!</String><!-- EndLevelDialog::DrawHighScores:1095 -->
+	<String id="579">Score pro&nbsp;:</String><!-- EndLevelDialog::DrawStats:1151 -->
+
+<!-- File: FloatingTextPatMgr.cpp -->
+	<String id="158">%d&nbsp;%  en plus de zen attitude&nbsp;!</String><!-- FloatingTextPatMgr::IsMoreZen:54 -->
+	<String id="159">+%S points de style</String><!-- FloatingTextPatMgr::IsStylePoints:78 -->
+	<String id="160">+%S</String><!-- FloatingTextPatMgr::IsPlusCommaSeparate:100 -->
+	<String id="161">%S x taquets</String><!-- FloatingTextPatMgr::IsScoreTally:122 -->
+	<String id="162">%S x %d taquet</String><!-- FloatingTextPatMgr::IsPegMultiplier:154 -->
+	<String id="163">%S x %d taquets</String><!-- FloatingTextPatMgr::IsPegMultiplier:163 -->
+	<String id="164">À toi, %S</String><!-- FloatingTextPatMgr::IsDuelTurnNotify:186 -->
+	<String id="165">%S : &cr;Dernière boule&nbsp;!</String><!-- FloatingTextPatMgr::IsDuelTurnNotify:200 -->
+	<String id="166">%d prochains tours</String><!-- FloatingTextPatMgr::IsPowerupNextTurns:229 -->
+	<String id="167">%d tours</String><!-- FloatingTextPatMgr::IsPowerupNextTurns:245 -->
+	<String id="168">Il te reste encore ^FF8800^%d TAQUETS %s ORANGE ^oldclr^&nbsp;!&cr;Détruis tous les ^FF8800^taquets orange^oldclr^ pour gagner&nbsp;!</String><!-- FloatingTextPatMgr::IsTipTenOrangeLeft:283 -->
+	<String id="169">+%S</String><!-- FloatingTextPatMgr::Is10kScoreMarker:306 -->
+	<String id="170">+%S</String><!-- FloatingTextPatMgr::Is10kScoreMarker:308 -->
+<!-- File: GameSelectDialog.cpp -->
+	<String id="580">Choisis un jeu</String><!-- Line 27 -->
+	<String id="581">Retour</String><!-- Line 27 -->
+	<String id="582">Peggle</String><!-- Line 34 -->
+	<String id="583">Nights</String><!-- Line 35 -->
+	<String id="584">Succès</String><!-- Line 39 -->
+	
+	
+<!-- File: HelpScreen.cpp -->
+	<String id="171">Touche là où tu veux que la boule aille. Le Lanceur visera automatiquement pour que la boule se dirige vers ce point.</String><!-- Line 104 -->
+	<String id="172">Tu peux également viser grâce à la nouvelle molette sur le côté droit de l&apos;écran.</String><!-- Line 107 -->
+	<String id="173">Touche le bouton d&apos;avance rapide pour accélérer le temps. Cela peut être utile lorsque tu attends que les objets bougent.</String><!-- Line 110 -->
+	<String id="174">&cr;Touche le bouton Tire pour tirer la boule. La  boule se dirige directement là où tu as visé.</String><!-- Line 113 -->
+	<String id="175">Besoin de plus de précision&nbsp;? &nbsp;Tapote deux fois l&apos;écran pour améliorer la précision avec le zoom Peggle.</String><!-- Line 116 -->
+	<String id="176">Il existe quatre types de taquets dans Peggle.</String><!-- Line 125 -->
+	<String id="177">&cr;Les taquets peuvent être ronds ou rectangulaires.</String><!-- Line 128 -->
+	<String id="178">Les taquets orange valent 10 fois plus que les taquets bleus. Élimine tous les taquets orange d&apos;un niveau pour le remporter.</String><!-- Line 131 -->
+	<String id="179">Le taquet violet vaut 50 fois plus que les taquets bleus. Ce taquet change de place à chaque coup.</String><!-- Line 135 -->
+	<String id="180">Le taquet vert active ton Pouvoir magique. Chaque niveau comporte deux taquets verts.</String><!-- Line 138 -->
+	<String id="181">Le nombre de points obtenus en un coup correspond à la valeur totale de tous les taquets x le nombre de taquets touchés.</String><!-- Line 146 -->
+	<String id="182">Chaque taquet touché en un coup vient s&apos;ajouter à un sous-total. Le score du coup est le sous-total multiplié par le nombre de taquets touchés.</String><!-- Line 149 -->
+	<String id="183">La valeur des taquets augmente à chaque taquet orange éliminé. Le Fiévromètre situé sur la gauche indique le multiplicateur de score obtenu.</String><!-- Line 152 -->
+	<String id="184">Certains coups stylés donnent des points en plus. Ces points s&apos;ajoutent directement à ton score et n&apos;affectent pas les 25 000 points nécessaires pour la boule supplémentaire.</String><!-- Line 155 -->
+	<String id="185">Une fois le niveau remporté, tu marques des points en plus grâce aux paniers bonus. Tu remportes également 10 000 points par boule non utilisée.</String><!-- Line 158 -->
+	<String id="186">Il existe plusieurs façons d&apos;obtenir une nouvelle boule.</String><!-- Line 166 -->
+	<String id="187">Tu obtiens une nouvelle boule si ta boule tombe dans le Panier.</String><!-- Line 169 -->
+	<String id="188">Si tu marques 25 000, 75 000 ou 125 000 en un coup, tu obtiens également une nouvelle boule.</String><!-- Line 172 -->
+	<String id="189">Si tu ne touches aucun taquet en un coup, tu peux remporter une boule supplémentaire en gagnant à pile ou face&nbsp;!</String><!-- Line 175 -->
+	<String id="190">En mode Duel, tu obtiens des points de style à la place des nouvelles boules. De même, le mode Duel n&apos;attribue aucune nouvelle boule à pile ou face.</String><!-- Line 178 -->
+	<String id="191">Il existe quatre modes de jeu dans Peggle.</String><!-- Line 186 -->
+	<String id="192">Le mode Aventure permet de t&apos;entraîner avec tous les Maîtres de Peggle. Complète tous les niveaux et tu deviendras un Maître de Peggle.</String><!-- Line 189 -->
+	<String id="193">Le mode Jeu rapide permet de sélectionner le niveau auquel tu veux jouer. Joue à n&apos;importe quel niveau déverrouillé en mode Aventure.</String><!-- Line 192 -->
+	<String id="194">Le mode Duel permet de te mesurer à un autre adversaire. Tu peux jouer contre l&apos;ordinateur ou contre une autre personne.</String><!-- Line 195 -->
+	<String id="195">C&apos;est dans le mode Défi que tu réaliseras tes plus grands exploits. &nbsp;Remporte tous les défis pour devenir un Grand Maître de Peggle.</String><!-- Line 198 -->
+	<String id="196">Les règles du mode Duel sont légèrement différentes de celles des modes à 1 joueur.</String><!-- Line 206 -->
+	<String id="197">En mode Duel, les deux joueurs tirent la boule chacun leur tour. Le joueur qui a le plus de points à la fin du jeu gagne.</String><!-- Line 209 -->
+	<String id="198">Tu dois toucher au moins un taquet orange à chaque coup. Si tu n&apos;y arrives pas, tu es pénalisé en perdant 25 % de ton score total.</String><!-- Line 212 -->
+	<String id="199">En mode Duel, tu obtiens des points de style à la place des nouvelles boules. De même, le mode Duel n&apos;attribue aucune nouvelle boule à pile ou face.</String><!-- Line 215 -->
+	<String id="200">Le jeu se termine quand un joueur a éliminé le dernier taquet orange ou quand les deux joueurs n&apos;ont plus de boules.</String><!-- Line 218 -->
+	<String id="201">Les ralentis te permettent de revivre tes coups préférés et de les montrer à tes amis et ta famille autant de fois que tu veux.</String><!-- Line 226 -->
+	<String id="202">Touche l&apos;icône Caméra située en haut à droite de l&apos;écran pour revoir ton dernier coup.</String><!-- Line 229 -->
+	<String id="203">Tu peux enregistrer les ralentis pour les revoir plus tard&nbsp;!&cr;Touche le bouton Ralenti dans le menu principal pour voir les ralentis enregistrés.</String><!-- Line 232 -->
+	<String id="204">Garde le doigt sur le bouton d&apos;avance rapide pour activer l&apos;avance rapide pendant les ralentis.</String><!-- Line 235 -->
+	<String id="205">Quoi d&apos;autre&nbsp;?</String><!-- Line 243 -->
+	<String id="206">Une fois le mode Aventure fini, tu peux rejouer n&apos;importe quel niveau avec n&apos;importe quel Maître de Peggle&nbsp;! &nbsp;Arriveras-tu à dépasser ton meilleur score&nbsp;?</String><!-- Line 246 -->
+	<String id="207">Si tu élimines tous les taquets d&apos;un niveau, tu obtiens un ruban bleu bonus&nbsp;!</String><!-- Line 249 -->
+	<String id="208">On dit qu&apos;il y a un rang de maîtrise Peggle supérieur à celui de Grand Maître. Finir chaque niveau devrait t&apos;aider à atteindre ce rang&nbsp;!</String><!-- Line 252 -->
+	<String id="209">Un mode pour daltoniens est disponible à partir du menu Options. &nbsp;</String><!-- Line 255 -->
+	<String id="210">Comment jouer</String><!-- Line 342 -->
+	<String id="211"></String><!-- Line 342 -->
+	<String id="212">OK</String><!-- Line 347 -->
+	<String id="213">Suivant</String><!-- Line 355 -->
+	<String id="214">Précédent</String><!-- Line 358 -->
+	<String id="215">Instructions</String><!-- Line 416 -->
+	<String id="216">Commandes</String><!-- Line 419 -->
+	<String id="217">Taquets</String><!-- Line 420 -->
+	<String id="218">Comptage des points</String><!-- Line 421 -->
+	<String id="219">Nouvelles boules</String><!-- Line 422 -->
+	<String id="220">Modes de jeu</String><!-- Line 423 -->
+	<String id="221">Mode Duel</String><!-- Line 424 -->
+	<String id="222">Ralentis</String><!-- Line 425 -->
+	<String id="223">Petits extras</String><!-- Line 426 -->
+	<String id="224">Comment jouer</String><!-- Line 432 -->
+<!-- File: HighScoreDialog.cpp -->
+	<String id="225">Records</String><!-- Line 17 -->
+	<String id="226">OK</String><!-- Line 17 -->
+<!-- File: InterfaceMgr.cpp -->
+	<String id="227">Dernière boule</String><!-- InterfaceMgr::DrawBallsLeftDetail:607 -->
+	<String id="228">Boules %d</String><!-- InterfaceMgr::DrawBallsLeftDetail:609 -->
+	<String id="229">Rapide</String><!-- InterfaceMgr::DrawOnePlayer:633 -->
+	<String id="230">Dev</String><!-- InterfaceMgr::DrawOnePlayer:635 -->
+	<String id="231">Démo</String><!-- InterfaceMgr::DrawOnePlayer:637 -->
+	<String id="232">Score</String><!-- InterfaceMgr::DrawOnePlayer:639 -->
+	<String id="233">Record</String><!-- InterfaceMgr::DrawOnePlayer:640 -->
+	<String id="234">Score&cr;total</String><!-- InterfaceMgr::DrawStageMode:679 -->
+	<String id="235">Score</String><!-- InterfaceMgr::DrawTrophyMode:721 -->
+	<String id="236">Défi</String><!-- InterfaceMgr::DrawTrophyMode:725 -->
+	<String id="237">Défi %d/%d</String><!-- InterfaceMgr::DrawTrophyMode:727 -->
+	<String id="238">Dernière vie</String><!-- InterfaceMgr::DrawTrophyMode:732 -->
+	<String id="239">Vies&nbsp;: %d</String><!-- InterfaceMgr::DrawTrophyMode:734 -->
+	<String id="240">Défi</String><!-- InterfaceMgr::UpdateMarquees:1398 -->
+	<String id="241">Défi %d/%d</String><!-- InterfaceMgr::UpdateMarquees:1400 -->
+	<String id="242">Dernière vie</String><!-- InterfaceMgr::UpdateMarquees:1405 -->
+	<String id="243">Vies&nbsp;: %d</String><!-- InterfaceMgr::UpdateMarquees:1407 -->
+	<String id="244">Boules %d</String><!-- InterfaceMgr::UpdateMarquees:1410 -->
+	<String id="245">Boules %d</String><!-- InterfaceMgr::UpdateMarquees:1415 -->
+	<String id="246">Boules %d</String><!-- InterfaceMgr::UpdateMarquees:1419 -->
+	<String id="247">Section&nbsp;: %d-%d</String><!-- InterfaceMgr::UpdateMarquees:1429 -->
+	<String id="248">Score total</String><!-- InterfaceMgr::UpdateMarquees:1433 -->
+	<String id="249">Score défi&cr;</String><!-- InterfaceMgr::UpdateMarquees:1438 -->
+	<String id="250">Dernière vie</String><!-- InterfaceMgr::UpdateMarquees:1442 -->
+	<String id="251">Vies&nbsp;: %d</String><!-- InterfaceMgr::UpdateMarquees:1444 -->
+	<String id="252">Défi %d/%d</String><!-- InterfaceMgr::UpdateMarquees:1455 -->
+	<String id="253">Démo&cr;</String><!-- InterfaceMgr::UpdateMarquees:1468 -->
+	<String id="254">Jeu rapide&cr;</String><!-- InterfaceMgr::UpdateMarquees:1472 -->
+	<String id="255">Meilleur score&cr;</String><!-- InterfaceMgr::UpdateMarquees:1476 -->
+	<String id="585"></String><!-- InterfaceMgr::UpdateMarquees:1433 -->
+	<String id="586">Score pro&cr;</String><!-- InterfaceMgr::UpdateMarquees:1439 -->
+	<String id="587">Score total</String><!-- InterfaceMgr::UpdateMarquees:1439 -->
+	<String id="588">Record&cr;</String><!-- InterfaceMgr::UpdateMarquees:1498 -->
+	<String id="589">Score pro&cr;</String><!-- InterfaceMgr::UpdateMarquees:1498 -->
+	
+	
+<!-- File: LevelScreen.cpp -->
+	<String id="256">Mesure-toi à un ami ou à l&apos;ordinateur dans ce mode de jeu à deux joueurs&nbsp;!</String><!-- Line 77 -->
+	<String id="257">Choisis un niveau pour le défi&nbsp;!</String><!-- Line 79 -->
+	<String id="258">Cinq meilleurs scores</String><!-- Line 98 -->
+	<String id="259">Section</String><!-- LevelThumbnailsWidget::Draw:237 -->
+	<String id="260">Section</String><!-- LevelThumbnailsWidget::Draw:257 -->
+	<String id="261">NIVEAU ALÉATOIRE</String><!-- LevelThumbnailsWidget::Draw:315 -->
+	<String id="262">Niveau aléatoire</String><!-- SexyChar *LevelThumbnailsWidget::GetSelectedLevelName:346 -->
+	<String id="263">CHOISIS UN NIVEAU</String><!-- LevelThumbnailsWidget::MouseUp:464 -->
+	<String id="264"></String><!-- LevelThumbnailsWidget::MouseUp:464 -->
+	<String id="265">Menu</String><!-- LevelThumbnailsWidget::MouseUp:476 -->
+	<String id="266">Duel</String><!-- LevelThumbnailsWidget::MouseUp:484 -->
+	<String id="267">Choisis un niveau</String><!-- LevelThumbnailsWidget::MouseUp:491 -->
+	<String id="268">Jeu rapide</String><!-- LevelThumbnailsWidget::MouseUp:494 -->
+	<String id="590">NIVEAU ALÉATOIRE</String><!-- LevelThumbnailsWidget::Draw:269 -->
+	<String id="591">Section</String><!-- LevelThumbnailsWidget::Draw:350 -->
+	<String id="592">Section</String><!-- LevelThumbnailsWidget::Draw:435 -->
+	
+	
+<!-- File: LoadingScreen.cpp -->
+	<String id="269">Taquets en cours de disposition...</String><!-- Line 32 -->
+	<String id="270">Arcs-en-ciel en cours de préparation...</String><!-- Line 33 -->
+	<String id="271">Volume de l&apos;Ode à la Joie en cours d&apos;ajustement...</String><!-- Line 34 -->
+	<String id="272">Trucs de Maître de Peggle en cours de réglage...</String><!-- Line 35 -->
+	<String id="273">Boules de Peggle en cours de chargement...</String><!-- Line 36 -->
+	<String id="274">Dictons savoureux en cours de préparation...</String><!-- Line 37 -->
+	<String id="275">Étincelles en cours de calcul...</String><!-- Line 38 -->
+	<String id="276">Rebonds en cours d&apos;ajustement...</String><!-- Line 39 -->
+	<String id="277">Perfection en cours de préparation...</String><!-- Line 40 -->
+	<String id="278">Ondes positives en cours d&apos;envoi...</String><!-- Line 41 -->
+	<String id="279">Courant en cours de génération...</String><!-- Line 42 -->
+	<String id="280">Éléments amusants en cours de duplication...</String><!-- Line 43 -->
+	<String id="281">En espérant que ça marche...</String><!-- Line 44 -->
+	<String id="282">Café en cours de préparation...</String><!-- Line 45 -->
+	<String id="283">Réflexion en cours...</String><!-- Line 46 -->
+	<String id="284">Électrons en cours d&apos;alignement...</String><!-- Line 47 -->
+	<String id="285">Griffes en cours de polissage...</String><!-- Line 48 -->
+	<String id="286">Invocation zen en cours...</String><!-- Line 49 -->
+	<String id="287">Générateur de chiffre aléatoire en cours de réglage...</String><!-- Line 50 -->
+	<String id="288">Plasmatrons en cours de déformation...</String><!-- Line 51 -->
+	<String id="289">Jeu de pelote en cours...</String><!-- Line 52 -->
+	<String id="290">Super mouvements en cours de préparation...</String><!-- Line 53 -->
+	<String id="291">Diplômes en cours d&apos;impression...</String><!-- Line 54 -->
+	<String id="292">Lumières en cours de clignotement...</String><!-- Line 55 -->
+	<String id="293">Trucs informatiques en cours...</String><!-- Line 56 -->
+	<String id="294">Syllogismes en cours d&apos;écriture...</String><!-- Line 57 -->
+	<String id="295">Bains de soleil en cours...</String><!-- Line 58 -->
+<!-- File: LogicMgr.cpp -->
+	<String id="296">Utilise ton ^00ff00^doigt^oldclr^ pour t&apos;aider à viser&nbsp;!&cr;Le viseur se déplace ^00FF00^exactement^oldclr^ vers l&apos;endroit que tu as tapoté sur l&apos;écran.</String><!-- LogicMgr::DoBeginTurnTip:1889 -->
+	<String id="297">Triple Score</String><!-- LogicMgr::CalcCornerDisplay:1952 -->
+	<String id="298">Boule Zen</String><!-- LogicMgr::CalcCornerDisplay:1954 -->
+	<String id="299">Électroboule</String><!-- LogicMgr::CalcCornerDisplay:1956 -->
+	<String id="300">Boule de feu</String><!-- LogicMgr::CalcCornerDisplay:1958 -->
+	<String id="301">Chapeau magique</String><!-- LogicMgr::CalcCornerDisplay:1960 -->
+	<String id="302">Règles du mode Duel</String><!-- LogicMgr::UpdateInitLevel:5487 -->
+	<String id="303">Continuer</String><!-- LogicMgr::UpdateInitLevel:5488 -->
+	<String id="304">Règles du mode Duel&cr;&cr;</String><!-- LogicMgr::UpdateInitLevel:5494 -->
+	<String id="305">Les deux joueurs tirent la boule ^00FF00^tour à tour.^oldclr^&cr;</String><!-- LogicMgr::UpdateInitLevel:5495 -->
+	<String id="306">Le but est de ^00FF00^marquer plus de points^oldclr^ que ton adversaire.&cr;</String><!-- LogicMgr::UpdateInitLevel:5496 -->
+	<String id="307">Tu es ^FF4444^pénalisé^oldclr^ si tu ^00FF00^ne touches aucun taquet orange^oldclr^ lors d&apos;un coup&nbsp;!</String><!-- LogicMgr::UpdateInitLevel:5497 -->
+	<String id="308">Ralenti</String><!-- LogicMgr::DrawBack:7131 -->
+	<String id="309">Tapote pour lancer</String><!-- LogicMgr::Draw:7168 -->
+	<String id="497">Joueur1</String><!-- LogicMgr::Clear:824 -->
+	<String id="498">Joueur2</String><!-- LogicMgr::Clear:825 -->
+	<String id="499">%S : &cr;Dernière boule&nbsp;!</String><!-- LogicMgr::DoBeginTurnText:1738 -->
+	<String id="500">À toi, %S</String><!-- LogicMgr::DoBeginTurnText:1741 -->
+	<String id="501">Plus que 3 boules</String><!-- LogicMgr::DoBeginTurnText:1747 -->
+	<String id="502">Plus que 2 boules</String><!-- LogicMgr::DoBeginTurnText:1749 -->
+	<String id="503">Dernière boule&nbsp;!</String><!-- LogicMgr::DoBeginTurnText:1751 -->
+	<String id="504">Tu as mis la ^00FF00^boule dans le panier&nbsp;!^oldclr^&cr;La ^oldclr^boule peut être^00FF00^ rejouée&nbsp;!</String><!-- LogicMgr::DoBeginTurnTip:1848 -->
+	<String id="505">Tu as remporté plus de ^FF00FF^25 000 points^oldclr^ lors de ton dernier coup&nbsp;!&cr;Tu remportes donc une ^00FF00^nouvelle boule&nbsp;!^oldclr^</String><!-- LogicMgr::DoBeginTurnTip:1858 -->
+	<String id="506">Si tu ^00FF00^ne touches aucun taquet en un coup^oldclr^ , &cr;tu peux récupérer ta boule en &cr;remportant un jeu de pile ou face&nbsp;!^00FF00^</String><!-- LogicMgr::DoBeginTurnTip:1860 -->
+	<String id="507">Il te reste ^00FF00^4 boules&nbsp;!^oldclr^</String><!-- LogicMgr::DoBeginTurnTip:1864 -->
+	<String id="508">Il te reste encore ^FF8800^UN TAQUET ORANGE ^oldclr^&nbsp;!&cr;Détruis tous les ^FF8800^TAQUETS ORANGE^oldclr^ pour gagner&nbsp;!</String><!-- LogicMgr::DoBeginTurnTip:1876 -->
+	<String id="509">Il te reste encore ^FF8800^%d TAQUETS ORANGE ^oldclr^&nbsp;!&cr;Détruis tous les ^FF8800^TAQUETS ORANGE^oldclr^ pour gagner&nbsp;!</String><!-- LogicMgr::DoBeginTurnTip:1878 -->
+	<String id="510">Conseil pour le Super Guide&nbsp;: &cr;^00FF00^Ajuste^oldclr^ ton coup avec la ^00FF00^molette^00FF00^^oldclr^ .</String><!-- LogicMgr::DoBeginTurnTip:1883 -->
+	<String id="511">Utilise ton ^00ff00^doigt^oldclr^ pour t&apos;aider à viser&nbsp;!&cr;Le viseur se déplace ^00FF00^exactement^oldclr^ vers &cr;l&apos;endroit que tu as tapoté sur l&apos;écran.</String><!-- LogicMgr::DoBeginTurnTip:1887 -->
+	<String id="512">Touche pour continuer</String><!-- LogicMgr::DoLevelDone:2275 -->
+	<String id="513">%S&cr;Prochain tour</String><!-- std::string MakeNextTurnString:3269 -->
+	<String id="514">%S&cr;%d prochains tours</String><!-- std::string MakeNextTurnString:3271 -->
+	<String id="515">%S&cr;%d tours</String><!-- std::string MakeNextTurnString:3273 -->
+	<String id="516">Coup distant&nbsp;!</String><!-- LogicMgr::DoStyleShot:3731 -->
+	<String id="517">Rebond contre le mur&nbsp;!</String><!-- LogicMgr::DoStyleShot:3732 -->
+	<String id="518">Flipper Mania&nbsp;!</String><!-- LogicMgr::DoStyleShot:3733 -->
+	<String id="519">Glissade extrême&nbsp;!</String><!-- LogicMgr::DoStyleShot:3734 -->
+	<String id="520">Attaque orange&nbsp;!</String><!-- LogicMgr::DoStyleShot:3735 -->
+	<String id="521">Coup de balai&nbsp;!</String><!-- LogicMgr::DoStyleShot:3736 -->
+	<String id="522">Folie du Multiball&nbsp;!</String><!-- LogicMgr::DoStyleShot:3737 -->
+	<String id="523">Coup du chapeau&nbsp;!</String><!-- LogicMgr::DoStyleShot:3738 -->
+	<String id="524">Chaud devant&nbsp;!</String><!-- LogicMgr::DoStyleShot:3739 -->
+	<String id="525">Frénésie de nouvelles boules&nbsp;!</String><!-- LogicMgr::DoStyleShot:3740 -->
+	<String id="526">Pluie de nouvelles boules&nbsp;!</String><!-- LogicMgr::DoStyleShot:3741 -->
+	<String id="527">Collecte par la pyramide&nbsp;!</String><!-- LogicMgr::DoStyleShot:3742 -->
+	<String id="528">L&apos;oeil de la pyramide&nbsp;!</String><!-- LogicMgr::DoStyleShot:3743 -->
+	<String id="529">Bonus du panier&nbsp;!</String><!-- LogicMgr::DoStyleShot:3744 -->
+	<String id="530">Bonus de coup exceptionnel&nbsp;!</String><!-- LogicMgr::DoStyleShot:3745 -->
+	<String id="531">Envoie la décharge</String><!-- LogicMgr::DoStyleShot:3746 -->
+	<String id="532">Coup super distant&nbsp;!</String><!-- LogicMgr::DoStyleShot:3748 -->
+	<String id="533">Double coup distant&nbsp;!</String><!-- LogicMgr::DoStyleShot:3749 -->
+	<String id="534">Formidaaable&nbsp;!</String><!-- LogicMgr::DoStyleShot:3750 -->
+	<String id="535">Formi-formidable&nbsp;!</String><!-- LogicMgr::DoStyleShot:3751 -->
+	<String id="536">Panier&nbsp;!</String><!-- LogicMgr::DoStyleShot:3752 -->
+	<String id="537">Rebond favorable&nbsp;!</String><!-- LogicMgr::DoStyleShot:3753 -->
+	<String id="538">Double Guide&nbsp;!</String><!-- LogicMgr::DoStyleShot:3758 -->
+	<String id="539">Triple boule&nbsp;!</String><!-- LogicMgr::DoStyleShot:3759 -->
+	<String id="540">Empilage de pyramides&nbsp;!</String><!-- LogicMgr::DoStyleShot:3760 -->
+	<String id="541">Big Bang&nbsp;!</String><!-- LogicMgr::DoStyleShot:3761 -->
+	<String id="542">Quelle chance&nbsp;!</String><!-- LogicMgr::DoStyleShot:3762 -->
+	<String id="543">Spectraculaire&nbsp;!</String><!-- LogicMgr::DoStyleShot:3763 -->
+	<String id="544">Pied au plancher&nbsp;!</String><!-- LogicMgr::DoStyleShot:3764 -->
+	<String id="545">Encore un tour&nbsp;!</String><!-- LogicMgr::DoStyleShot:3765 -->
+	<String id="546">Super boules de feu&nbsp;!</String><!-- LogicMgr::DoStyleShot:3766 -->
+	<String id="547">Zen attitude&nbsp;!</String><!-- LogicMgr::DoStyleShot:3767 -->
+	<String id="548">Surtension&nbsp;!</String><!-- LogicMgr::DoStyleShot:3768 -->
+	<String id="549">Multiplication&nbsp;!</String><!-- LogicMgr::PegHit:4190 -->
+	<String id="550">Totalement raté&cr;Aucune nouvelle boule</String><!-- LogicMgr::FreeBallHit:4323 -->
+	<String id="551">Nouvelle boule&nbsp;!</String><!-- LogicMgr::FreeBallHit:4420 -->
+	<String id="552">%s x %d taquet</String><!-- LogicMgr::RemoveHitPegs:4753 -->
+	<String id="553">%s x %d taquets</String><!-- LogicMgr::RemoveHitPegs:4755 -->
+	<String id="554">Tu ne peux tirer qu&apos;^00FF00^une seule boule^oldclr^ à la fois&nbsp;!^oldclr^</String><!-- LogicMgr::MouseDown:5005 -->
+	<String id="555">Extenseur de coup&nbsp;!</String><!-- LogicMgr::FinishShot:6010 -->
+	<String id="556">%s x taquets&cr;</String><!-- LogicMgr::FinishShot:6054 -->
+	<String id="557">Pas d&apos;orange</String><!-- LogicMgr::FinishShot:6059 -->
+	<String id="558">-25%</String><!-- LogicMgr::FinishShot:6060 -->
+	<String id="559">+%s points de style</String><!-- LogicMgr::AddStyleScoreText:6326 -->
+	<String id="560">Score triplé&nbsp;!</String><!-- LogicMgr::UpdatePostShot:6510 -->
+	<String id="561">Ralenti terminé&nbsp;!&cr;Clique sur le bouton ^FF44FF^Fermer^oldclr^ pour revenir au jeu.&cr;Clique sur le bouton ^00FF00^Ralenti^oldclr^ pour revoir l&apos;action.</String><!-- LogicMgr::UpdateLevelDone:6686 -->
+	<String id="562">Divination du meilleur coup...</String><!-- LogicMgr::UpdateZenShot:6769 -->
+	<String id="563">Zen attitude atteinte&nbsp;!</String><!-- LogicMgr::UpdateZenShot:6776 -->
+	<String id="564">Pas d&apos;amélioration&nbsp;!</String><!-- LogicMgr::UpdateZenShot:6796 -->
+	<String id="565">ZEN ATTITUDE MAXIMALE ATTEINTE&nbsp;!!!</String><!-- LogicMgr::UpdateZenShot:6808 -->
+	<String id="566">%d&nbsp;%% en plus de zen attitude&nbsp;!</String><!-- LogicMgr::UpdateZenShot:6810 --><!-- File: MainMenu.cpp -->
+	<String id="310">Ralentis</String><!-- Line 72 -->
+	<String id="311">Options</String><!-- Line 74 -->
+	<String id="312">Stats</String><!-- Line 76 -->
+	<String id="313">Ce n&apos;est pas toi&nbsp;? Tappe ici</String><!-- Line 105 -->
+	<String id="314">Les infos du joueur sont correctes mais pas les scores&nbsp;?</String><!-- MainMenu::SyncPlayerInfo:182 -->
+	<String id="315">Bienvenue dans Peggle,</String><!-- MainMenu::DrawSpeechBubble:272 -->
+	<String id="316">Heureux de te revoir,</String><!-- MainMenu::DrawSpeechBubble:274 -->
+	<String id="317">!</String><!-- MainMenu::DrawSpeechBubble:285 -->
+	<String id="318">Déverrouiller</String><!-- MainMenu::Draw:387 -->
+	<String id="319">Verrouillé</String><!-- MainMenu::DoNotYet:503 -->
+	<String id="320">OK</String><!-- MainMenu::DoNotYet:503 -->
+	<String id="321">^FFFF00^MODE DUEL VERROUILLÉ&nbsp;!^oldclr^&cr;Ce mode te permet de te mesurer à un ami ou à l&apos;ordinateur.&cr;&cr;^FFFF00^Pour le déverrouiller&nbsp;:^oldclr^&cr;termine la Section 1 du mode Aventure&nbsp;!</String><!-- MainMenu::StartGame:654 -->
+	<String id="322">^FFFF00^MODE DÉFI VERROUILLÉ&nbsp;!^oldclr^&cr;Ce mode présente 40 défis pour les joueurs avancés.&cr;&cr;^FFFF00^Pour le déverrouiller&nbsp;:^oldclr^&cr;termine le mode Aventure&nbsp;!</String><!-- MainMenu::StartGame:671 -->
+<!-- File: MoreGamesScreen.cpp -->
+	<String id="323">Plus de jeux&nbsp;!</String><!-- MoreGamesListWidget::AddRow:93 -->
+    <String id="1008">RETOUR</String><!-- MoreGamesScreen::MoreGamesScreen:107 -->
+<!-- File: NewUserDialog.cpp -->
+	<String id="324">Renommer</String><!-- Line 23 -->
+	<String id="325">Nouvel utilisateur</String><!-- Line 23 -->
+	<String id="326">Saisis ton nom.</String><!-- Line 24 -->
+<!-- File: OptionsDialog.cpp -->
+	<String id="327">MENU</String><!-- Line 46 -->
+	<String id="328">OPTIONS</String><!-- Line 46 -->
+	<String id="329"></String><!-- Line 46 -->
+	<String id="330">Effets sonores</String><!-- Line 57 -->
+	<String id="331">Mode Daltonien</String><!-- Line 65 -->
+	<String id="332">Aide</String><!-- Line 67 -->
+	<String id="333">Démo</String><!-- Line 68 -->
+	<String id="334">Gaucher</String><!-- Line 69 -->
+	<String id="335">Nouveau niveau</String><!-- Line 74 -->
+	<String id="336">Nouveau défi</String><!-- Line 75 -->
+	<String id="337">Recommencer défi</String><!-- Line 81 -->
+	<String id="338">Niveau suivant</String><!-- Line 85 -->
+	<String id="339">Recommencer le niveau</String><!-- Line 87 -->
+	<String id="340">Crédits</String><!-- Line 118 -->
+	<String id="341">Pas de mode Fenêtre</String><!-- OptionsDialog::CheckboxChecked:334 -->
+	<String id="342">Le mode Fenêtre est uniquement disponible si le modèle colorimétrique de ton bureau est 16 ou 32 bits, ce qui n&apos;est pas le cas.</String><!-- OptionsDialog::CheckboxChecked:334 -->
+	<String id="343">OK</String><!-- OptionsDialog::CheckboxChecked:334 -->
+	<String id="344">^FFFF00^MODE DÉMO VERROUILLÉ&nbsp;!^oldclr^&cr;Ce mode montre comment jouent les Maîtres.&cr;&cr;^FFFF00^Pour déverrouiller&nbsp;:^oldclr^&cr;termine la Section 2 du mode Aventure&nbsp;!</String><!-- OptionsDialog::ButtonDepress:416 -->
+	<String id="345">Verrouillé</String><!-- OptionsDialog::ButtonDepress:417 -->
+	<String id="346">OK</String><!-- OptionsDialog::ButtonDepress:417 -->
+	<String id="567">Musique</String><!-- Line 54 -->
+	<String id="568">Musique (off)</String><!-- Line 55 -->	
+    <String id="1005">PREMIER MENU</String><!-- OptionsDialog::OptionsDialog:86 -->
+    <String id="1006">Terminé</String><!-- OptionsDialog::OptionsDialog:101 -->
+<!-- File: ProgressScreen.cpp -->
+	<String id="593">Continuer</String><!-- ProgressScreen::GetPortraitSpeechInfo:227 -->
+
+<!-- File: RateViewController.cpp -->
+    <String id="8010">Oui</String> <!--RateViewController::RateViewController:36-->
+    <String id="8011">Non</String> <!--RateViewController::RateViewController:40-->
+    <String id="8012">Plus Tard</String> <!--RateViewController::RateViewController:44-->
+    
+<!-- File: ReplayDialog.cpp -->
+	<String id="347">Sauver le ralenti</String><!-- ReplayDialog::ButtonDepress:209 -->
+	<String id="348">Entre une description pour ce ralenti.</String><!-- ReplayDialog::ButtonDepress:209 -->
+	<String id="571">OK</String><!-- ReplayDialog::ButtonDepress:213 -->
+	<String id="572">Annuler</String><!-- ReplayDialog::ButtonDepress:214 -->	
+<!-- File: ReplayFileDialog.cpp -->
+	<String id="349">%d/%m/%Y %I:%M%p</String><!-- ReplayThumbnailsWidget::GetReplayDetails:289 -->
+	<String id="350">Défi&nbsp;:&nbsp;</String><!-- ReplayThumbnailsWidget::GetReplayDetails:333 -->
+	<String id="351">Duel&nbsp;: Section %d-%d&nbsp;: %S</String><!-- ReplayThumbnailsWidget::GetReplayDetails:337 -->
+	<String id="352">Section %d-%d&nbsp;: %S</String><!-- ReplayThumbnailsWidget::GetReplayDetails:341 -->
+	<String id="353">Voir ralentis</String><!-- ReplayThumbnailsWidget::FileInfo::operator<:401 -->
+	<String id="354">Éditer</String><!-- ReplayThumbnailsWidget::FileInfo::operator<:413 -->
+	<String id="355">Supprimer</String><!-- ReplayThumbnailsWidget::FileInfo::operator<:414 -->
+	<String id="356">Lancer</String><!-- ReplayThumbnailsWidget::FileInfo::operator<:419 -->
+	<String id="357">Menu</String><!-- ReplayThumbnailsWidget::FileInfo::operator<:422 -->
+	<String id="358">Annuler</String><!-- ReplayThumbnailsWidget::FileInfo::operator<:424 -->
+	<String id="359">Erreur de fichier</String><!-- ReplayFileDialog::HandleYes:600 -->
+	<String id="360">Impossible d&apos;ouvrir le fichier du ralenti.</String><!-- ReplayFileDialog::HandleYes:601 -->
+	<String id="361">OK</String><!-- ReplayFileDialog::HandleYes:601 -->
+	<String id="362">Supprimer le ralenti&nbsp;?</String><!-- ReplayFileDialog::ButtonDepress:694 -->
+	<String id="363">Veux-tu vraiment supprimer &cr;ce ralenti&nbsp;?</String><!-- ReplayFileDialog::ButtonDepress:695 -->
+	<String id="364">Supprimer</String><!-- ReplayFileDialog::ButtonDepress:697 -->
+	<String id="365">Annuler</String><!-- ReplayFileDialog::ButtonDepress:698 -->
+	<String id="366">Éditer ralenti</String><!-- ReplayFileDialog::ButtonDepress:708 -->
+	<String id="367">Entre une description pour ce ralenti.</String><!-- ReplayFileDialog::ButtonDepress:708 -->
+	<String id="573">OK</String><!-- ReplayFileDialog::ButtonDepress:710 -->
+	<String id="574">Annuler</String><!-- ReplayFileDialog::ButtonDepress:711 -->
+	
+<!-- File: SlotMachineDialog.cpp -->
+	<String id="368">Roue de la chance&nbsp;!</String><!-- Line 26 -->
+<!-- File: StageDialog.cpp -->
+	<String id="369">Sagesse de Peggle</String><!-- Line 23 -->
+	<String id="370">OK</String><!-- Line 24 -->
+	<String id="371">Suivant</String><!-- Line 44 -->
+	<String id="372">Utilise la ^64D8FD^MOLETTE^oldclr^ pour ajuster ta ^FFE078^VISÉE.^oldclr^&cr;&cr;Touche le bouton ^FC920A^TIRE^oldclr^ pour tirer la boule.</String><!-- StageDialog::Draw:108 -->
+	<String id="373">^FC920A^PRÉCISION&nbsp;!^oldclr^&cr;&cr;^64D8FD^TAPOTE DEUX FOIS^oldclr^ l&apos;écran pour ^FFE078^ZOOMER&nbsp;!^oldclr^</String><!-- StageDialog::Draw:114 -->
+	<String id="374">Suivant</String><!-- StageDialog::MouseDown:180 -->
+	<String id="375">OK</String><!-- StageDialog::ButtonDepress:249 -->
+<!-- File: StoryScreen.cpp -->
+	<String id="376">Continuer</String><!-- TypingTextWidget::MouseDown:157 -->
+	<String id="377">Une</String><!-- StoryScreen::Draw:1042 -->
+	<String id="378">Deux</String><!-- StoryScreen::Draw:1042 -->
+	<String id="379">Trois</String><!-- StoryScreen::Draw:1042 -->
+	<String id="380">Quatre</String><!-- StoryScreen::Draw:1042 -->
+	<String id="381">Cinq</String><!-- StoryScreen::Draw:1042 -->
+	<String id="382">Six</String><!-- StoryScreen::Draw:1042 -->
+	<String id="383">Sept</String><!-- StoryScreen::Draw:1042 -->
+	<String id="384">Huit</String><!-- StoryScreen::Draw:1042 -->
+	<String id="385">Neuf</String><!-- StoryScreen::Draw:1042 -->
+	<String id="386">Dix</String><!-- StoryScreen::Draw:1042 -->
+	<String id="387">Onze</String><!-- StoryScreen::Draw:1042 -->
+	<String id="388">Section %S</String><!-- StoryScreen::Draw:1044 -->
+	<String id="389">Section %d</String><!-- StoryScreen::Draw:1046 -->
+	<String id="390">La Sagesse de Peggle &cr;en quelques mots</String><!-- StoryScreen::Draw:1099 -->
+<!-- File: TestDialog.cpp -->
+	<String id="391">CHOISIS UN NIVEAU</String><!-- Line 39 -->
+	<String id="392"></String><!-- Line 39 -->
+	<String id="393">Menu</String><!-- Line 49 -->
+	<String id="394">Jouer</String><!-- Line 50 -->
+	<String id="395">Niveau au hasard</String><!-- TestDialog::Draw:138 -->
+<!-- File: ThunderCommon.cpp -->
+	<String id="469">Peggle Deluxe&nbsp;</String><!-- Sexy::SetAppTitle:293 -->
+	<String id="470">&nbsp;-&nbsp;</String><!-- Sexy::SetAppTitle:295 -->
+	<String id="471">Ordinateur</String><!-- Sexy::GetLocalizedPlayerName:1043 -->
+	<String id="472">Joueur2</String><!-- Sexy::GetLocalizedPlayerName:1044 -->
+	<String id="473">Joueur2</String><!-- Sexy::GetLocalizedPlayerName:1045 -->
+	<String id="474">Joueur1</String><!-- Sexy::GetLocalizedPlayerName:1046 -->
+	<String id="475">Joueur 1</String><!-- Sexy::GetLocalizedPlayerName:1047 -->
+	<String id="476">Ordinateur</String><!-- Sexy::GetLocalizedPlayerName:1060 -->
+	<String id="477">Joueur2</String><!-- Sexy::GetLocalizedPlayerName:1061 -->
+	<String id="478">Joueur 2</String><!-- Sexy::GetLocalizedPlayerName:1062 -->
+	<String id="479">Joueur1</String><!-- Sexy::GetLocalizedPlayerName:1063 -->
+	<String id="480">Joueur 1</String><!-- Sexy::GetLocalizedPlayerName:1064 -->
+<!-- File: ThunderballApp.cpp -->
+	<String id="396">Quitter Peggle&nbsp;?</String><!-- ThunderballApp::DoConfirmQuitDialog:2191 -->
+	<String id="397">Es-tu sûr de vouloir&cr;quitter le jeu&nbsp;?</String><!-- ThunderballApp::DoConfirmQuitDialog:2191 -->
+	<String id="398">Veux-tu ^00FF00^continuer^oldclr^ la partie en cours ou commencer une ^00FF00^nouvelle partie^oldclr^&nbsp;?&cr;&cr;</String><!-- ThunderballApp::CheckSaveGame:2289 -->
+	<String id="399">Défi&nbsp;:&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2291 -->
+	<String id="400">Niveau&nbsp;: %d/%d&cr;</String><!-- ThunderballApp::CheckSaveGame:2293 -->
+	<String id="401">Boules restantes&nbsp;: %d&cr;</String><!-- ThunderballApp::CheckSaveGame:2296 -->
+	<String id="402">&nbsp;-&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2300 -->
+	<String id="403">&nbsp;points&cr;</String><!-- ThunderballApp::CheckSaveGame:2300 -->
+	<String id="404">&nbsp;-&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2301 -->
+	<String id="405">&nbsp;points&cr;</String><!-- ThunderballApp::CheckSaveGame:2301 -->
+	<String id="406">Score&nbsp;:&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2305 -->
+	<String id="407">Veux-tu ^00FF00^continuer^oldclr^ la partie en cours ou commencer une ^00FF00^nouvelle partie^oldclr^&nbsp;?&cr;&cr;</String><!-- ThunderballApp::CheckSaveGame:2319 -->
+	<String id="408">^44DAFB^</String><!-- ThunderballApp::CheckSaveGame:2320 -->
+	<String id="409">&nbsp;-&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2324 -->
+	<String id="410">&nbsp;points&cr;</String><!-- ThunderballApp::CheckSaveGame:2324 -->
+	<String id="411">&nbsp;-&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2325 -->
+	<String id="412">&nbsp;points&cr;</String><!-- ThunderballApp::CheckSaveGame:2325 -->
+	<String id="413">Niveau&nbsp;:&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2329 -->
+	<String id="414">Score&nbsp;:&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2330 -->
+	<String id="415">Veux-tu ^00FF00^continuer^oldclr^ le niveau en cours ou ^00FF00^recommencer^oldclr^ le niveau&nbsp;?&cr;&cr;</String><!-- ThunderballApp::CheckSaveGame:2348 -->
+	<String id="416">^44DAFB^</String><!-- ThunderballApp::CheckSaveGame:2349 -->
+	<String id="417">Score&nbsp;:&nbsp;</String><!-- ThunderballApp::CheckSaveGame:2350 -->
+	<String id="418">Boules restantes&nbsp;: %d&cr;</String><!-- ThunderballApp::CheckSaveGame:2351 -->
+	<String id="419">Erreur de sauvegarde</String><!-- ThunderballApp::FinishContinueDialog:2404 -->
+	<String id="420">Le fichier de sauvegarde est corrompu.</String><!-- ThunderballApp::FinishContinueDialog:2404 -->
+	<String id="421">OK</String><!-- ThunderballApp::FinishContinueDialog:2404 -->
+	<String id="422">Quitter le jeu&nbsp;?</String><!-- ThunderballApp::DoConfirmMainMenuDialog:2427 -->
+	<String id="423">Ta session de jeu sera enregistrée lorsque tu quitteras. &nbsp;Veux-tu continuer&nbsp;?</String><!-- ThunderballApp::DoConfirmMainMenuDialog:2428 -->
+	<String id="424">Quitter</String><!-- ThunderballApp::DoConfirmMainMenuDialog:2429 -->
+	<String id="425">Recommencer</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2460 -->
+	<String id="426">Recommencer le défi&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2463 -->
+	<String id="427">Veux-tu recommencer le défi&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2464 -->
+	<String id="428">Recommencer le niveau&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2468 -->
+	<String id="429">Veux-tu recommencer le niveau&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2469 -->
+	<String id="430">Nouveau niveau&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2479 -->
+	<String id="431">Veux-tu choisir un nouveau niveau&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2480 -->
+	<String id="432">Nouveau niveau</String><!-- ThunderballApp::DoConfirmRestartLevelDialog:2481 -->
+	<String id="433">Nouveau défi&nbsp;?</String><!-- ThunderballApp::DoConfirmNewChallengeDialog:2544 -->
+	<String id="434">Veux-tu choisir un nouveau défi&nbsp;? Ta progression dans ce défi sera perdue.</String><!-- ThunderballApp::DoConfirmNewChallengeDialog:2545 -->
+	<String id="435">Nouveau défi</String><!-- ThunderballApp::DoConfirmNewChallengeDialog:2549 -->
+	<String id="436">Recommencer le mode Aventure&nbsp;?</String><!-- ThunderballApp::DoConfirmRestartAdventureDialog:2570 -->
+	<String id="437">Veux-tu ^00FF00^RECOMMENCER LE MODE AVENTURE&nbsp;?^oldclr^&cr;&cr;Tu reviendras au tout premier niveau et ton score sera remis à zéro.</String><!-- ThunderballApp::DoConfirmRestartAdventureDialog:2571 -->
+	<String id="438">Recommencer</String><!-- ThunderballApp::DoConfirmRestartAdventureDialog:2575 -->
+    
+    <String id="801">Tu as déjà terminé le dernier niveau dans le mode aventure. Veux-tu recommencer une ^00FF00^NOUVELLE PARTIE&nbsp;?^oldclr^</String><!-- ThunderballApp::DoConfirmRestartAdventureDialog:2571 -->
+	<String id="802">AVENTURE COMPLÉTÉE</String><!-- ThunderballApp::DoConfirmRestartAdventureDialog:2575 -->
+    <String id="803">NOUVEAU</String><!-- ThunderballApp::DoConfirmRestartAdventureDialog:2575 -->
+    
+	<String id="439">Choix du jeu</String><!-- ThunderballApp::DoGameSelectDialog:2656 -->
+	<String id="440">Choisis le jeu auquel tu veux jouer.</String><!-- ThunderballApp::DoGameSelectDialog:2656 -->
+	<String id="441"></String><!-- ThunderballApp::DoGameSelectDialog:2656 -->
+	<String id="442">Ralentis</String><!-- ThunderballApp::DoTipDialog:2738 -->
+	<String id="443">Lorsque tu réalises un bon coup, tu peux l&apos;enregistrer grâce à l'icône ^00FF00^Caméra^oldclr^. Tu peux alors les revoir ici ou les montrer avec un ami&nbsp;!</String><!-- ThunderballApp::DoTipDialog:2738 -->
+	<String id="444">OK</String><!-- ThunderballApp::DoTipDialog:2738 -->
+	<String id="445">Ralentis</String><!-- ThunderballApp::DoTipDialog:2740 -->
+	<String id="446">Lorsque tu réalises un bon coup, tu peux l&apos;enregistrer grâce à l'icône ^00FF00^Caméra^oldclr^. Tu peux alors le revoir ici ou le montrer avec un ami&nbsp;!&cr;&cr;Tu n&apos;as enregistré aucun ralenti, enregistre-les pendant que tu joues&nbsp;!</String><!-- ThunderballApp::DoTipDialog:2740 -->
+	<String id="447">OK</String><!-- ThunderballApp::DoTipDialog:2740 -->
+	<String id="448">Démo</String><!-- ThunderballApp::DoTipDialog:2743 -->
+	<String id="449">Regarde la façon dont un Maître de Peggle joue un niveau. C&apos;est plus divertissant qu&apos;un bol de cacao devant un aquarium par une froide journée d&apos;hiver&nbsp;!</String><!-- ThunderballApp::DoTipDialog:2743 -->
+	<String id="450">OK</String><!-- ThunderballApp::DoTipDialog:2743 -->
+	<String id="451">Version d&apos;essai</String><!-- ThunderballApp::DoTipDialog:2746 -->
+	<String id="452">Le reste du mode Aventure est verrouillé dans cette version d&apos;essai gratuite. Tu peux continuer à jouer en mode ^00FF00^Jeu rapide^oldclr^ ou ^00FF00^Duel^oldclr^.&cr;&cr;Achète Peggle dès maintenant pour déverrouiller instantanément le jeu et continuer ton aventure&nbsp;!</String><!-- ThunderballApp::DoTipDialog:2746 -->
+	<String id="453">Fermer</String><!-- ThunderballApp::DoTipDialog:2746 -->
+	<String id="454">Saisis ton nom pour créer un nouveau profil d&apos;utilisateur dans lequel sauvegarder les meilleurs résultats et la progression de jeu.</String><!-- ThunderballApp::FinishCreateUserDialog:2818 -->
+	<String id="455">Saisis ton nom</String><!-- ThunderballApp::FinishCreateUserDialog:2821 -->
+	<String id="456">OK</String><!-- ThunderballApp::FinishCreateUserDialog:2821 -->
+	<String id="457">Saisis ton nom</String><!-- ThunderballApp::FinishCreateUserDialog:2827 -->
+	<String id="458">OK</String><!-- ThunderballApp::FinishCreateUserDialog:2827 -->
+	<String id="459">Conflit de nom</String><!-- ThunderballApp::FinishCreateUserDialog:2840 -->
+	<String id="460">Le nom que tu as saisi est déjà utilisé. &nbsp;Saisis un autre nom de joueur.</String><!-- ThunderballApp::FinishCreateUserDialog:2840 -->
+	<String id="461">OK</String><!-- ThunderballApp::FinishCreateUserDialog:2840 -->
+	<String id="462">Supprimer l&apos;utilisateur&nbsp;?</String><!-- ThunderballApp::DoConfirmDeleteUserDialog:2877 -->
+	<String id="463">%S sera définitivement supprimé de la liste des joueurs&nbsp;!</String><!-- ThunderballApp::DoConfirmDeleteUserDialog:2878 -->
+	<String id="464">Supprimer</String><!-- ThunderballApp::DoConfirmDeleteUserDialog:2883 -->
+	<String id="465">Annuler</String><!-- ThunderballApp::DoConfirmDeleteUserDialog:2884 -->
+	<String id="466">Conflit de nom</String><!-- ThunderballApp::FinishRenameUserDialog:2971 -->
+	<String id="467">Le nom que tu as saisi est déjà utilisé. &nbsp;Saisis un autre nom de joueur.</String><!-- ThunderballApp::FinishRenameUserDialog:2971 -->
+	<String id="468">OK</String><!-- ThunderballApp::FinishRenameUserDialog:2971 -->
+	<String id="594">Choisis ton jeu</String><!-- ThunderballApp::ShowGameSelectDialog:2892 -->
+	
+<!-- File: TrophyRoom.cpp -->
+	<String id="481"></String><!-- Line 54 -->
+	<String id="482"></String><!-- Line 54 -->
+	<String id="483">Continuer</String><!-- Line 63 -->
+<!-- File: TrophyScreen.cpp -->
+	<String id="484">DÉFIS DE MAÎTRES</String><!-- TrophyThumbnailsWidget::GetSelectedRect:412 -->
+	<String id="485"></String><!-- TrophyThumbnailsWidget::GetSelectedRect:412 -->
+	<String id="486">Menu</String><!-- TrophyThumbnailsWidget::GetSelectedRect:420 -->
+<!-- File: UserDialog.cpp -->
+	<String id="487"></String><!-- Line 33 -->
+	<String id="488">Renommer</String><!-- Line 43 -->
+	<String id="489">Supprimer</String><!-- Line 44 -->
+	<String id="490">Créer un utilisateur</String><!-- Line 45 -->
+	<String id="491">(Créer un utilisateur)</String><!-- Line 48 -->
+	<String id="492">HU, C&apos;EST TOI&nbsp;?</String><!-- UserDialog::Draw:194 -->
+	<String id="575">OK</String><!-- Line 48 -->
+	<String id="576">Annuler</String><!-- Line 49 -->
+	
+        
+<!-- SexyAppFramework File: Dialog.cpp -->    
+    <String id="8000">OUI</String>
+    <String id="8001">NON</String>
+    <String id="8002">OK</String>
+	<String id="8003">ANNULER</String>
+    
+    <!-- Connect to store -->
+    <String id="8004">Connexion</String>
+    <String id="8005">Veuillez patienter...</String>
+    <String id="8006">239</String>
+    
+	<!-- !AUTOGEN -->
+		<String id="10000">&nbsp;</String><!-- Line 49 -->
+		<String id="10001">d/m/y</String><!-- Line 49 -->
+
+</Properties>

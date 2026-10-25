@@ -1,0 +1,20 @@
+[package]
+name = "peggle-ios-entry"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[lib]
+name = "peggle_compatibility"
+crate-type = ["staticlib"]
+
+[dependencies]
+touchHLE = { path = "../../compatibility-core", default-features = false, features = ["ios-static"] }
+
+serde_json = "=1.0.91"
+zip = { version = "=0.6.4", default-features = false, features = ["deflate"] }
+plist = "=1.8.0"
+libc = "=0.2.180"
+uuid = { version = "=1.2.2", default-features = false, features = ["v4"] }

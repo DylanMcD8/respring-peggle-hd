@@ -1,0 +1,37 @@
+Define CharList0
+ ( ' ', ',', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ' );
+
+Define WidthList0
+ (  68,  33,  33,  72,  59,  70,  67,  77,  70,  75,  80,  72,  75,  33 );
+
+Define RectList0
+ ( (  0, 0,  0,   0), (  2, 1, 40,  56), ( 43, 1, 40,  35), (384, 1, 80, 119)
+   ( 84, 1, 67, 119), (228, 1, 77, 119), (152, 1, 75, 119), (714, 1, 85, 119)
+   (306, 1, 77, 119), (546, 1, 83, 119), (800, 1, 87, 119), (465, 1, 80, 119)
+   (630, 1, 83, 119), (  0, 0,  0,   0) );
+
+Define OffsetList0
+ ( (0, 0), (-4, 98), (-4, 98), (-4, 14), (-4, 14), (-4, 14), (-4, 14), (-4, 14)
+   (-4, 14), (-4, 14), (-4, 14), (-4, 14), (-4, 14), (0, 0) );
+
+Define ExInfoKeys0
+ ( "sfb.bold", "sfb.boxsize", "sfb.face", "sfb.italics", "sfb.linespacing"
+   "sfb.quality", "sfb.script", "sfb.size", "sfb.text", "sfb.underline" );
+
+Define ExInfoValues0
+ ( "0", "0", "Bonk", "0", "0"
+   "4", "0", "120", ",.0123456789 ", "0" );
+
+CreateLayer               Main;
+LayerSetImage             Main 'Bonk60';
+LayerSetBaseOrder         Main 0;
+LayerSetAscent            Main 126;
+LayerSetHeight            Main 158;
+LayerSetCharWidths        Main CharList0 WidthList0;
+LayerSetImageMap          Main CharList0 RectList0;
+LayerSetCharOffsets       Main CharList0 OffsetList0;
+LayerSetPointSize         Main 120;
+LayerSetExInfo            Main ExInfoKeys0 ExInfoValues0;
+LayerSetAlphaCorrection   Main 1;
+
+SetDefaultPointSize       120;
