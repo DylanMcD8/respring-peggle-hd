@@ -96,7 +96,7 @@ void PeggleAutoDisconnect(void){
 }
 void PeggleAutoEnable(void(^completion)(NSString *)){
  if(!PeggleSyncReady()){completion(PeggleUsesFolderSync()?@"Choose an iCloud Drive folder in Manage Save Files before enabling sync.":@"CloudKit is unavailable in this build. Export and import a save file to test transfers.");return;}
- NSDictionary *source=Act(10,@"",NO);if(![source[@"ok"]boolValue]){completion(@"Open Peggle and create an in-game user before enabling automatic sync.");return;}
+ NSDictionary *source=Act(10,@"",NO);if(![source[@"ok"]boolValue]){completion(@"Start the game and create an in-game user before syncing save files.");return;}
  NSUserDefaults *d=NSUserDefaults.standardUserDefaults;[d setBool:YES forKey:PeggleSyncPreferenceKey(@"PeggleAutomaticProgressSync")];[d setBool:NO forKey:@"PeggleShowSaveManagementOnLaunch"];[d setInteger:[source[@"profile_id"]integerValue]forKey:PeggleSyncPreferenceKey(@"PeggleSyncProfileID")];Epoch++;Local=source;Pending=nil;Deferred=nil;LastUploaded=nil;atomic_store(&LinkedID,[source[@"profile_id"]unsignedIntValue]);atomic_store(&PromptReady,0);Persist();PeggleAutoPrepare(Docs,NO);if(PeggleUsesFolderSync()&&StartupIssue){completion(StartupIssue);return;}completion([NSString stringWithFormat:@"Automatic sync enabled for in-game user %@. %@",source[@"profile"],Status]);
 }
 

@@ -367,7 +367,8 @@ extern void peggle_ios_keyboard_native_diagnostic(int32_t stage,uint32_t current
     keyboardVisible = YES;
     if (textField.window) {
         showingKeyboard = YES;
-        [textField becomeFirstResponder];
+        BOOL accepted = [textField becomeFirstResponder];
+        NSLog(@"Peggle keyboard requested: accepted=%d key_window=%d attached=%d", accepted, textField.window.isKeyWindow, textField.window != nil);
         showingKeyboard = NO;
     }
 }

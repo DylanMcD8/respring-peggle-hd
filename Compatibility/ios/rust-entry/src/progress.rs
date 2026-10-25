@@ -79,8 +79,18 @@ impl<'a> Decoder<'a>{
 }
 impl Manager {
  fn progress_source(&self)->Result<(Value,PathBuf,Value,BTreeMap<String,Vec<u8>>,Vec<String>,String,String,Progress)>{
-  let state=self.state()?;let guest=self.active_guest(&state)?;let fp=self.fingerprint(&guest)?;let (files,dirs)=raw_import::snapshot_guest(&guest)?;
-  let (_,selected,_)=self.collect(&guest)?;let idx=raw_import::index(files.get("Documents/userdata/users.dat").ok_or("Open Peggle and create an in-game user before syncing save files")?)?;
+  let state=self.state()?;let guest=self.active_guest(&state)?;
+  // A clean installation has no userdata directory; an untouched name dialog
+  // can also leave a valid empty index. Explain the required first step before
+  // the generic snapshot/backup validators report missing files.
+  let no_user="Start the game and create an in-game user before syncing save files.";
+  for path in [guest.clone(),guest.join("Documents"),guest.join("Documents/userdata"),guest.join("Documents/userdata/users.dat")] {
+   no_link(&path)?;if !path.exists(){return Err(no_user.into());}
+  }
+  let index=read(&guest.join("Documents/userdata/users.dat"),MAX_FILE)?;
+  if index.as_slice()==[1,0,0,0,0,0]{return Err(no_user.into());}
+  let fp=self.fingerprint(&guest)?;let (files,dirs)=raw_import::snapshot_guest(&guest)?;
+  let (_,selected,_)=self.collect(&guest)?;let idx=raw_import::index(files.get("Documents/userdata/users.dat").ok_or("Start the game and create an in-game user before syncing save files.")?)?;
   let name=idx.iter().find(|e|e.id==selected).ok_or("Selected in-game user is missing")?.name.clone();let path=format!("Documents/userdata/user{selected}.dat");let p=Decoder::parse(files.get(&path).ok_or("In-game user details missing")?)?.progress()?;
   if self.fingerprint(&guest)?!=fp||self.state()?!=state{return Err("Local save files changed; restart before syncing".into());}Ok((state,guest,fp,files,dirs,name,path,p))
  }

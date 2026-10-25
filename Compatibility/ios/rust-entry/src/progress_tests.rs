@@ -51,3 +51,13 @@ fn individual_challenge_completions_merge_independently_in_both_campaigns() {
  assert_eq!(decoder.field_bytes(0x188),check.field_bytes(0x188));
  assert_eq!(restored,restored.merged(&a).merged(&b));
 }
+
+#[test]fn first_launch_sync_explains_how_to_create_a_user(){
+ let(root,docs)=setup();let guest=Manager::guest(&docs);fs::remove_dir_all(&guest).unwrap();
+ let m=Manager::open(&docs).unwrap();let expected="Start the game and create an in-game user before syncing save files.";
+ assert_eq!(m.export_progress().unwrap_err(),expected);
+ let userdata=guest.join("Documents/userdata");fs::create_dir_all(&userdata).unwrap();assert_eq!(m.export_progress().unwrap_err(),expected);
+ fs::write(userdata.join("users.dat"),[1,0,0,0,0,0]).unwrap();assert_eq!(m.export_progress().unwrap_err(),expected);
+ fs::write(userdata.join("users.dat"),[99,0,0,0,0,0]).unwrap();assert_ne!(m.export_progress().unwrap_err(),expected);
+ drop(m);fs::remove_dir_all(root).unwrap();
+}

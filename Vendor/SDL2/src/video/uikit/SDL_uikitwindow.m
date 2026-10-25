@@ -267,9 +267,10 @@ UIKit_ShowWindow(_THIS, SDL_Window * window)
         [data.uiwindow makeKeyAndVisible];
 
         /* Make this window the current mouse focus for touch input */
-        SDL_VideoDisplay *display = SDL_GetDisplayForWindow(window);
-        SDL_DisplayData *displaydata = (__bridge SDL_DisplayData *) display->driverdata;
-        if (displaydata.uiscreen == [UIScreen mainScreen]) {
+        // The scene's key window owns input. Legacy SDL display metadata can
+        // describe a different panel on Duo, so UIScreen identity cannot decide
+        // keyboard focus (SDL_StartTextInput requires an input-focused window).
+        if (data.uiwindow.isKeyWindow) {
             SDL_SetMouseFocus(window);
             SDL_SetKeyboardFocus(window);
         }
