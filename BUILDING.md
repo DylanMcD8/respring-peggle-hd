@@ -1,6 +1,6 @@
 # Building Peggle HD
 
-Use full Xcode selected by `xcode-select`, Python 3, Rust through rustup, CMake and Ninja on PATH. Targets are ARM64 iOS and Apple silicon iOS Simulator.
+Use full Xcode selected by `xcode-select`, Python 3.11 or newer, Rust through rustup, CMake and Ninja on PATH. Targets are ARM64 iOS and Apple silicon iOS Simulator.
 
 ```sh
 rustup toolchain install 1.99.0 --profile minimal

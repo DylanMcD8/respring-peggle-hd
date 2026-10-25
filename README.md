@@ -37,7 +37,7 @@ The deployment target is iOS/iPadOS 15.0. Testing has focused on recent OS versi
 ## Build from Source
 *Written by AI agent*
 
-You need full Xcode with Icon Composer support, Python 3, Rust, CMake and Ninja. Tested tools are Xcode 27.1, Rust 1.99.0 and CMake 4.3.5. Rust is pinned; Cargo and modified SDL2 sources are included.
+You need full Xcode with Icon Composer support, Python 3.11 or newer, Rust, CMake and Ninja. Tested tools are Xcode 27.1, Rust 1.99.0 and CMake 4.3.5. Rust is pinned; Cargo and modified SDL2 sources are included.
 
 1. Install the Rust toolchain and Apple ARM64 targets described in [BUILDING.md](BUILDING.md).
 2. Open `PeggleHD.xcodeproj`, choose **PeggleHD** and a destination.
